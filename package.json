@@ -1,0 +1,28 @@
+{
+  "name": "base-structure",
+  "version": "1.0.0",
+  "description": "Base Structure to creata Express Application",
+  "homepage": "https://github.com/Boiler-Express/Base-Express#readme",
+  "license": "ISC",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": {
+    "git": "https://github.com/Boiler-Express/Base-Express",
+    "author": "Boiler-Express"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Boiler-Express/Base-Express.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Boiler-Express/Base-Express/issues"
+  },
+  "dependencies": {
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}

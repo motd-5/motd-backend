@@ -1,0 +1,9 @@
+node_modules/
+
+# If you clone this poilerplates
+# Please apply these files
+
+# .env
+# *.env
+# *.env.*
+# .gitignore
