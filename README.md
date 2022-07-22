@@ -18,12 +18,20 @@ npx degit Boiler-Express/Base-Express
 
 ## Get Start, selected version
 
+```cmd
+<!-- If, you want to clone @1.0.0 / @1.1.0 version -->
+
 git clone -b '@1.0.0' --single-branch --depth 1 https://github.com/Boiler-Express/Base-Express.git
+
+git clone -b '@1.1.0' --single-branch --depth 1 https://github.com/Boiler-Express/Base-Express.git
+```
 
 | Versions  | Description   | Updated Date |
 | :-------: | :-----------  | :----------- |
 | @1.0.0    | This version contains... <br> - Base Strcutrue of Singleton Express | `2022-07-22` |
 | @1.1.0    | This version contains... <br> - Base Structure of Singleton Express <br> - Base Config Settings of Testing, `Jest` | `2022-07-22` (latests) |
+
+
 
 <hr>
 
