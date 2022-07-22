@@ -2,6 +2,13 @@
 
 This is `First Step` of [Basic Course](https://github.com/Boiler-Express/.github/blob/main/profile/BASIC-COURSE.md) to dev Express App.
 
+This Template only contain **Basic Application**.
+
+If you want to more information of Architecture, visit [Architecture.md](https://github.com/Boiler-Express/Base-Express/blob/main/ARCHITECTURE.md)
+
+<img src="./ARCHITECTURE.png" style="width: 500px;">
+
+
 <hr>
 
 ## Get Started, lastest version
