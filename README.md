@@ -1,20 +1,13 @@
-# Welcome 🎉 Base Express
+# Welcome 🎉 Base-Express
 
-![](./Architecture.png)
-
-<hr>
+This is `First Step` of [Basic Course](https://github.com/Boiler-Express/.github/blob/main/profile/BASIC-COURSE.md) to dev Express App.
 
 ## Get Started
 
-<hr>
+```cmd
+git clone https://github.com/Boiler-Express/Base-Express.git
+npx degit Boiler-Express/Base-Express
+```
 
-## Introduce
-
-## Contributor
-
-1. unchaptered [GitHub](https://github.com/unchaptered)
-2. younggunkim [GitHub](https://github.com/younggunkim)
-3. eastsunyong [GitHub](https://github.com/eastsunyong)
-4. Minsun Kim [GitHub](https://github.com/Minsun91)
-5. soularofdawn [GitHub](https://github.com/soularofdawn)
-6. wonseok-do [GitHub](https://github.com/wonseok-do)
+- `git clone` : copy all files, include all versions.
+- `npx degit` : copy all files, except versions.
