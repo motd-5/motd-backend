@@ -29,8 +29,8 @@ git clone -b '@1.1.0' --single-branch --depth 1 https://github.com/Boiler-Expres
 | Versions  | Description   | Updated Date |
 | :-------: | :-----------  | :----------- |
 | @1.0.0    | This version contains... <br> - Base Strcutrue of Singleton Express | `2022-07-22` |
-| @1.1.0    | This version contains... <br> - Base Structure of Singleton Express <br> - Base Config Settings of Testing, `Jest` | `2022-07-22` (latests) |
-
+| @1.1.0    | This version contains... <br> - Base Structure of Singleton Express <br> - Base Config Settings of Testing, `Jest` | `2022-07-22` |
+| @1.2.0    | This version contains... <br> - Base Structure of Singleton Express <br> - Base Config Settings of Testing, `Jest` <br> - 100% coverage testing code, for eaxmples | `2022-07-22` (latest) |
 
 
 <hr>
