@@ -6,7 +6,6 @@
   "license": "ISC",
   "type": "module",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "dev": "NODE_ENV=dev nodemon src/index.js",
     "start": "NODE_ENV=prod node src/index.js",
