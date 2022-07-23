@@ -25,6 +25,10 @@ npx degit Boiler-Express/Base-Express
 
 ## Get Start, selected version
 
+> You can select specific release version. <br>
+> But you can push local file into new Repo. <br>
+> IF you can encounter _shallow update not allowed_, visit our issue [[Issue] [remote rejected] shallow update not allowed](https://github.com/Boiler-Express/Base-Express/issues/6)
+
 ```cmd
 <!-- If, you want to clone @1.0.0 / @1.1.0 version -->
 
