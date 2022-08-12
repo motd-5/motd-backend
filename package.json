@@ -1,10 +1,9 @@
 {
-  "name": "base-structure",
+  "name": "modt-backend",
   "version": "1.0.0",
   "description": "Base Structure to creata Express Application",
-  "homepage": "https://github.com/Boiler-Express/Base-Express#readme",
+  "homepage": "https://github.com/motd-5/motd-backend",
   "license": "ISC",
-  "type": "module",
   "main": "index.js",
   "scripts": {
     "dev": "NODE_ENV=dev nodemon src/index.js",
@@ -26,6 +25,7 @@
   "dependencies": {
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "mysql2": "^2.3.3",
     "sequelize": "^6.21.3"
   },
   "devDependencies": {
