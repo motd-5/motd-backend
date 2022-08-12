@@ -1,9 +1,13 @@
 import Env from './env.js';
 import App from './server.js';
-import '../models/index.js';
-// (() => {
 
-//     const { MODE, PORT } = Env.getEnvInstance();
-//     const app = App.getAppInstance(MODE, PORT);
+(() => {
 
-// })()
+    const {
+        PORT, MODE,
+        MYSQL_HOST, MYSQL_USERNAME, MYSQL_DATABASE, MYSQL_DIALECT
+    } = Env;
+
+    const app = App.getAppInstance(MODE, PORT);
+
+})();
