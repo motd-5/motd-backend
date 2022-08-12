@@ -4,7 +4,7 @@ coverage/
 # If you clone this poilerplates
 # Please apply these files
 
-# .env
-# *.env
-# *.env.*
-# .gitignore
+.env
+*.env
+*.env.*
+.gitignore

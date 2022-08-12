@@ -1,34 +1,23 @@
-import dotenv from 'dotenv/config';
+import dotenv from 'dotenv';
 
-/**
- * `Env` class is craeted for single instance.
- * 
- * If you don't know Singleton Pattern.
- * 
- * Please visit : https://github.com/Boiler-Express/.github/blob/main/notes/design/SINGLETON.md
- */
-export default class Env {
+const result = (() => {
 
-    static env;
-
-    constructor() {}
-
-    /**
-     * getEnvInstance should return `Environment Object`.
-     * 
-     * @returns `Object Literal`
-     */
-    static getEnvInstance() {
-
-        if (this.env) return Env.env;
-
-        this.env = {
-            MODE: process.env.NODE_ENV,
-            PORT: process.env.PORT
-        };
-
-        return this.env;
-        
+    const MODE = process.env.NODE_ENV;
+    const PATH = MODE === 'prod' ? '.env.prod' :
+                    MODE === 'dev' ? '.env.dev' : '.env.test';
+    const result = dotenv.config({
+        // path: undefined
+        path: PATH
+    });
+    
+    // 객체 조건문 안에 넣으면 true
+    if (result.error) {
+        // throw result.error;
+        throw new Error(`${PATH} 파일을 만들어주세요.`);
     }
 
-}
+    return result.parsed;
+
+})()
+
+export default result;
