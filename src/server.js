@@ -11,7 +11,7 @@ export default class App {
     this.app = Express();
 
     this.app.listen(PORT, () => {
-      if (MODE !== "test") console.log(`Server is running on ${MODE}`);
+      if (MODE !== "test") console.log(`Server is running on ${PORT}, ${MODE}`);
     });
 
     return this.app;
