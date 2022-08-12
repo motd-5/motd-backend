@@ -1,5 +1,6 @@
 node_modules/
 coverage/
+config/
 
 # If you clone this poilerplates
 # Please apply these files

@@ -1,9 +1,5 @@
-import Env from './env.js';
-import App from './server.js';
+const express = require('express');
 
-(() => {
+const app = express();
 
-    const { MODE, PORT } = Env.getEnvInstance();
-    const app = App.getAppInstance(MODE, PORT);
-
-})()
+app.listen(3000, () => console.log(`Server is running on 3000`));
