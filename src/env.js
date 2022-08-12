@@ -16,7 +16,10 @@ const result = (() => {
         throw new Error(`${PATH} 파일을 만들어주세요.`);
     }
 
-    return result.parsed;
+    return {
+        MODE,
+        ...result.parsed
+    };
 
 })()
 
