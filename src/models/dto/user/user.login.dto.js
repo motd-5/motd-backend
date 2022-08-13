@@ -11,7 +11,7 @@ class UserLoginDto extends BaseDto {
         this.password = password;
     }
 
-    getJoiIntsance() {
+    getJoiInstance() {
         return {
             email: joi.string().required(),
             password: joi.string().required(),

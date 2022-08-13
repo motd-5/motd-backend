@@ -15,7 +15,7 @@ class UserJoinDto extends BaseDto {
         this.pwConfirm = pwConfirm;
     }
 
-    getJoiIntsance() {
+    getJoiInstance() {
         return {
             email: joi.string().required(),
             nickname: joi.string().required(),
