@@ -16,6 +16,28 @@ class MusicController {
         this.musicService = new MusicService();
     }
 
+    // 음악 생성
+    postMusics = async (req, res, next) => {
+        try {
+            const postMusicDto = new PostMusicDto(req.body);
+            this.joiValidator.validate(postMusicDto);
+
+            const music = await this.musicService.postMusics(PostMusicDto);
+
+            return res.status(200).json(
+                this.formProvider.getSuccessFormDto('노래 생성에 성공했습니다.', {
+                    music,
+                }),
+            );
+        } catch (err) {
+            const exception = exceptionHandler(err);
+
+            return res
+                .status(exception.statusCode)
+                .json(this.formProvider.getFailureFormDto(exception.message));
+        }
+    };
+
     // 음악 전체 조회
     getMusics = async (req, res, next) => {
         try {
@@ -35,17 +57,15 @@ class MusicController {
         }
     };
 
-    // 음악 생성
-    postMusics = async (req, res, next) => {
+    // 음악 상세 조회
+    getOneMusic = async (req, res, next) => {
+        const musicId = 1;
         try {
-            const postMusicDto = new PostMusicDto(req.body);
-            this.joiValidator.validate(postMusicDto);
-
-            const music = await this.musicService.postMusics(PostMusicDto);
+            const musicOne = await this.musicService.getOneMusic();
 
             return res.status(200).json(
-                this.formProvider.getSuccessFormDto('노래 생성에 성공했습니다.', {
-                    music,
+                this.formProvider.getSuccessFormDto('노래 상세 조회에 성공했습니다.', {
+                    musicOne,
                 }),
             );
         } catch (err) {

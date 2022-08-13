@@ -15,8 +15,18 @@ class MusicService {
         return result;
     };
 
-    getMusics = async (getMusic) => {
+    /** @param { GetMusicDto } getMusicDto @return { string }*/
+    getMusics = async (getMusics) => {
         const result = this.musicRepository.getMusics();
+
+        return result;
+    };
+
+    /** @param { GetMusicDto } getMusicDto @return { string }*/
+    getOneMusic = async (getOneMusic) => {
+        const result = this.musicRepository.getOneMusic();
+
+        return result;
     };
 }
 
