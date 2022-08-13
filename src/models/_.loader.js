@@ -4,7 +4,7 @@ const FailureFormDto = require('./dto/form/failure.form.dto');
 
 const UserJoinDto = require('./dto/user/user.join.dto');
 const BaseDto = require('./dto/base/base.dto');
-
+const PostCommentDto = require('./dto/comment/post.comment.dto');
 const {
     CustomException,
     ConflictException,
@@ -18,6 +18,7 @@ module.exports = {
 
     BaseDto,
     UserJoinDto,
+    PostCommentDto,
 
     CustomException,
     ConflictException,
