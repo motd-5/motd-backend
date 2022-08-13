@@ -5,6 +5,7 @@ const FailureFormDto = require('./dto/form/failure.form.dto');
 const BaseDto = require('./dto/base/base.dto');
 
 const UserJoinDto = require('./dto/user/user.join.dto');
+
 const UserLoginDto = require('./dto/user/user.login.dto');
 
 const GetMusicDto = require('./dto/music/get.musics.dto');
@@ -25,6 +26,7 @@ module.exports = {
 
     BaseDto,
     UserJoinDto,
+
     UserLoginDto,
     PostCommentDto,
     GetMusicDto,
