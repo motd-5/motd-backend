@@ -42,7 +42,7 @@ class MusicController {
             this.joiValidator.validate(postMusicDto);
 
             return res.status(200).json(
-                this.formProvider.getSuccessFormDto('노래 전체 조회에 성공했습니다.', {
+                this.formProvider.getSuccessFormDto('노래 생성에 성공했습니다.', {
                     // music,
                 }),
             );
