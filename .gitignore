@@ -9,3 +9,5 @@ config/
 *.env
 *.env.*
 .gitignore
+
+**/config.json

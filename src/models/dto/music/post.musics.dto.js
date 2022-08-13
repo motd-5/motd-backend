@@ -15,7 +15,7 @@ class PostMusicsDto extends BaseDto {
         this.musicValue = musicValue;
     }
 
-    getJoiInstnace() {
+    getJoiInstance() {
         return {
             title: joi.string().required(),
             artist: joi.string().required(),
