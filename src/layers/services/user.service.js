@@ -1,6 +1,5 @@
 const { UserJoinDto, UserLoginDto, ConflictException } = require('../../models/_.loader');
 const UserRepository = require('../repositories/user.repository');
-const { User } = require('../../../models/index');
 
 class UserService {
     userRepository;
