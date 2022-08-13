@@ -8,7 +8,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('', globalRouter);
-app.use('/musics', musicRouter);
+app.use('/api', globalRouter);
+app.use('/api/musics', musicRouter);
 
 app.listen(3000, () => console.log(`Server is running on 3000`));
