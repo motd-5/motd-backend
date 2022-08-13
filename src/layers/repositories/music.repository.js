@@ -9,6 +9,11 @@ class MusicRepository {
     getMusics = () => {
         return 'happy';
     };
+
+    getOneMusic = () => {
+        console.log('왜 안 되니?');
+        return 'smile';
+    };
 }
 
 module.exports = MusicRepository;
