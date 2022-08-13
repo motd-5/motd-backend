@@ -17,6 +17,7 @@ class UserController {
 
     /** @param { e.Request } req   @param { e.Response } res  @param { e.NextFunction } next */
     join = async (req, res, next) => {
+        console.log('hello');
         const userJoinDto = new UserJoinDto(req.body);
 
         try {
