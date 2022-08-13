@@ -2,8 +2,9 @@ const FormDto = require('./dto/form/form.dto');
 const SuccessFomrDto = require('./dto/form/success.form.dto');
 const FailureFormDto = require('./dto/form/failure.form.dto');
 
-const UserJoinDto = require('./dto/user/user.join.dto');
 const BaseDto = require('./dto/base/base.dto');
+const UserJoinDto = require('./dto/user/user.join.dto');
+const UserLoginDto = require('./dto/user/user.login.dto');
 
 const {
     CustomException,
@@ -18,6 +19,7 @@ module.exports = {
 
     BaseDto,
     UserJoinDto,
+    UserLoginDto,
 
     CustomException,
     ConflictException,
