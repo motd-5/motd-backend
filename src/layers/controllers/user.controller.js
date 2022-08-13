@@ -1,5 +1,4 @@
 const e = require('express');
-const joi = require('joi');
 const UserService = require('../services/user.service');
 const { UserJoinDto, UserLoginDto } = require('../../models/_.loader');
 const { FormDtoProvider, JoiValidator, exceptionHandler } = require('../../modules/_.loader');
@@ -17,7 +16,6 @@ class UserController {
 
     /** @param { e.Request } req   @param { e.Response } res  @param { e.NextFunction } next */
     join = async (req, res, next) => {
-        console.log('hello');
         const userJoinDto = new UserJoinDto(req.body);
 
         try {
