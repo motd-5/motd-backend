@@ -5,12 +5,14 @@ class UserJoinDto extends BaseDto {
     email;
     nickname;
     password;
+    pwConfirm;
 
-    constructor({ email, nickname, password }) {
+    constructor({ email, nickname, password, pwConfirm }) {
         super();
         this.email = email;
         this.nickname = nickname;
         this.password = password;
+        this.pwConfirm = pwConfirm;
     }
 
     getJoiIntsance() {
@@ -18,6 +20,7 @@ class UserJoinDto extends BaseDto {
             email: joi.string().required(),
             nickname: joi.string().required(),
             password: joi.string().required(),
+            pwConfirm: joi.ref('password'),
         };
     }
 }
