@@ -1,6 +1,6 @@
 const e = require('express');
 const joi = require('joi');
-const UserService = require('../services/user.service');
+const MusicService = require('../services/music.service');
 const { GetMusicDto, PostMusicDto } = require('../../models/_.loader');
 const { FormDtoProvider, JoiValidator, exceptionHandler } = require('../../modules/_.loader');
 // const etMusicsDto = require('../../models/dto/music/get.musics.dto');
@@ -8,19 +8,18 @@ const { FormDtoProvider, JoiValidator, exceptionHandler } = require('../../modul
 class MusicController {
     formProvider;
     joiValidatorMusic;
+    musicService;
 
     constructor() {
         this.formProvider = new FormDtoProvider();
         this.joiValidator = new JoiValidator();
+        this.musicService = new MusicService();
     }
 
-    //음악 전체 조회하고자 하는데 req.body는 아니고
+    // 음악 전체 조회
     getMusics = async (req, res, next) => {
         try {
-            // const getMusicsDto = new GetMusicDto({ ...req.body }); // db 안의 데이터를 가져와야 하는데
-            // this.joiValidator.validate(dto);
-            // console.log(getMusicsDto);
-            // const music = await this.
+            const music = await this.musicService.getMusics();
 
             return res.status(200).json(
                 this.formProvider.getSuccessFormDto('노래 전체 조회에 성공했습니다.', {
@@ -36,14 +35,17 @@ class MusicController {
         }
     };
 
+    // 음악 생성
     postMusics = async (req, res, next) => {
         try {
             const postMusicDto = new PostMusicDto(req.body);
             this.joiValidator.validate(postMusicDto);
 
+            const music = await this.musicService.postMusics(PostMusicDto);
+
             return res.status(200).json(
                 this.formProvider.getSuccessFormDto('노래 생성에 성공했습니다.', {
-                    // music,
+                    music,
                 }),
             );
         } catch (err) {
