@@ -1,7 +1,5 @@
-const UserService = require('../services/user.service');
-
 class UserRepository {
-    userService = new UserService();
+    constructor() {}
 
     join = () => {
         return 'hello';
