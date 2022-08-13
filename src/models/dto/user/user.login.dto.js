@@ -1,28 +1,22 @@
 const joi = require('joi');
 const BaseDto = require('../base/base.dto');
 
-class UserJoinDto extends BaseDto {
+class UserLoginDto extends BaseDto {
     email;
-    nickname;
-    password;
     pwConfirm;
 
-    constructor({ email, nickname, password, pwConfirm }) {
+    constructor({ email, password }) {
         super();
         this.email = email;
-        this.nickname = nickname;
         this.password = password;
-        this.pwConfirm = pwConfirm;
     }
 
     getJoiInstance() {
         return {
             email: joi.string().required(),
-            nickname: joi.string().required(),
             password: joi.string().required(),
-            pwConfirm: joi.ref('password'),
         };
     }
 }
 
-module.exports = UserJoinDto;
+module.exports = UserLoginDto;
