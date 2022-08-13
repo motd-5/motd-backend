@@ -6,7 +6,7 @@ const UserJoinDto = require('./dto/user/user.join.dto');
 const GetMusicDto = require('./dto/music/get.musics.dto');
 const PostMusicDto = require('./dto/music/post.musics.dto');
 const BaseDto = require('./dto/base/base.dto');
-
+const PostCommentDto = require('./dto/comment/post.comment.dto');
 const {
     CustomException,
     ConflictException,
@@ -20,6 +20,7 @@ module.exports = {
 
     BaseDto,
     UserJoinDto,
+    PostCommentDto,
     GetMusicDto,
     PostMusicDto,
 
