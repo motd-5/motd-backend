@@ -1,4 +1,4 @@
-const { UserJoinDto, ConflictException } = require('../../models/_.loader');
+const { UserJoinDto, UserLoginDto, ConflictException } = require('../../models/_.loader');
 const UserRepository = require('../repositories/user.repository');
 
 class UserService {
@@ -13,6 +13,11 @@ class UserService {
         const result = this.userRepository.join();
 
         return result;
+    };
+
+    /**  @param { UserLoginDto } userLoginDto  @returns { string } */
+    login = async (userLoginDto) => {
+        return 'hello';
     };
 }
 

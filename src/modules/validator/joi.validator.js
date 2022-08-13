@@ -6,7 +6,7 @@ class JoiValidator {
 
     /** @param { BaseDto } dto @returns { BaseDto }*/
     async validate(dto) {
-        return await joi.object(dto.getJoiInstnace()).validateAsync(dto);
+        return await joi.object(dto.getJoiInstance()).validateAsync(dto);
     }
 }
 

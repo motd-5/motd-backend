@@ -15,7 +15,7 @@ class GetMusicsDto extends BaseDto {
         this.musicUrl = musicUrl;
     }
 
-    getJoiInstnace() {
+    getJoiInstance() {
         return {
             title: joi.string().required(),
             artist: joi.string().required(),
