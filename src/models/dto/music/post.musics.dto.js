@@ -5,14 +5,14 @@ class PostMusicsDto extends BaseDto {
     title;
     artist;
     album;
-    musicValue;
+    musicUrl;
 
     constructor({ title, artist, album, musicValue }) {
         super();
         this.title = title;
         this.artist = artist;
         this.album = album;
-        this.musicValue = musicValue;
+        this.musicUrl = this.musicUrl;
     }
 
     getJoiInstance() {
