@@ -3,7 +3,7 @@ const BaseDto = require('../base/base.dto');
 
 class UserLoginDto extends BaseDto {
     email;
-    pwConfirm;
+    password;
 
     constructor({ email, password }) {
         super();
