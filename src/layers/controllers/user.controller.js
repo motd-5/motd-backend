@@ -19,21 +19,23 @@ class UserController {
         const userJoinDto = new UserJoinDto(req.body);
 
         try {
-            this.joiValidator.validate(userJoinDto);
+            await this.joiValidator.validate(userJoinDto);
 
             const result = await this.userService.join(userJoinDto);
 
             return res
                 .status(200)
                 .json(
-                    this.formProvider.getSuccessFormDto('회원가입에 성공하셨습니다.', { result }),
+                    this.formProvider.getSuccessFormDto('회원가입에 성공하셨습니다.', {
+                        userJoinDto,
+                    }),
                 );
         } catch (err) {
             const exception = exceptionHandler(err);
 
             return res
                 .status(exception.statusCode)
-                .json(this.formProvider.getFailureFormDto(exception.message));
+                .json(this.formProvider.getFailureFormDto(exception.message, { userJoinDto }));
         }
     };
 
@@ -54,7 +56,7 @@ class UserController {
 
             return res
                 .status(exception.statusCode)
-                .json(this.formProvider.getFailureFormDto(exception.message));
+                .json(this.formProvider.getFailureFormDto(exception.message, { userLoginDto }));
         }
     };
 }
