@@ -13,8 +13,13 @@ module.exports = (sequelize, DataTypes) => {
     }
     MusicComment.init(
         {
-            musicId: DataTypes.STRING,
-            commentId: DataTypes.STRING,
+            musicId: {
+                primaryKey: true,
+                type: DataTypes.INTEGER,
+            },
+            commentId: {
+                type: DataTypes.INTEGER,
+            },
         },
         {
             sequelize,

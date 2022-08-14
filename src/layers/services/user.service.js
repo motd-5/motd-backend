@@ -1,3 +1,5 @@
+const { Sequelize } = require('sequelize');
+const { User } = require('../../sequelize/models');
 const { UserJoinDto, UserLoginDto, ConflictException } = require('../../models/_.loader');
 const UserRepository = require('../repositories/user.repository');
 
@@ -10,9 +12,22 @@ class UserService {
 
     /**  @param { UserJoinDto } userJoinDto  @returns { string } */
     join = async (userJoinDto) => {
-        const result = this.userRepository.join();
+        console.log(userJoinDto);
 
-        return result;
+        try {
+            const result = await User.create({
+                email: userJoinDto.email,
+                nickname: userJoinDto.nickname,
+                password: userJoinDto.password,
+            });
+        } catch (err) {
+            console.log(err);
+            throw err;
+        }
+
+        console.log(result);
+
+        return userJoinDto;
     };
 
     /**  @param { UserLoginDto } userLoginDto  @returns { string } */
