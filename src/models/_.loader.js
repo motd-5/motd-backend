@@ -1,5 +1,5 @@
 const FormDto = require('./dto/form/form.dto');
-const SuccessFomrDto = require('./dto/form/success.form.dto');
+const SuccessFormDto = require('./dto/form/success.form.dto');
 const FailureFormDto = require('./dto/form/failure.form.dto');
 
 const BaseDto = require('./dto/base/base.dto');
@@ -21,7 +21,7 @@ const {
 
 module.exports = {
     FormDto,
-    SuccessFomrDto,
+    SuccessFormDto,
     FailureFormDto,
 
     BaseDto,
