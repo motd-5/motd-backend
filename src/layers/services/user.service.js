@@ -1,33 +1,35 @@
 const { Sequelize } = require('sequelize');
 const { User } = require('../../sequelize/models');
-const { UserJoinDto, UserLoginDto, ConflictException } = require('../../models/_.loader');
+const { UserDto, UserJoinDto, UserLoginDto, ConflictException } = require('../../models/_.loader');
+const { BcryptProvider } = require('../../modules/_.loader');
 const UserRepository = require('../repositories/user.repository');
 
 class UserService {
     userRepository;
+    bcryptProvider;
 
     constructor() {
         this.userRepository = new UserRepository();
+        this.bcryptProvider = new BcryptProvider();
     }
 
-    /**  @param { UserJoinDto } userJoinDto  @returns { string } */
+    /**
+     *
+     * @param { UserJoinDto } userJoinDto
+     * @returns { Promise<UserDto> }
+     */
     join = async (userJoinDto) => {
-        console.log(userJoinDto);
-
         try {
-            const result = await User.create({
-                email: userJoinDto.email,
-                nickname: userJoinDto.nickname,
-                password: userJoinDto.password,
-            });
+            const isExists = await this.userRepository.isExistsUser(userJoinDto.email);
+            if (isExists)
+                throw new ConflictException(`${userJoinDto.email} 은 사용 중인 이메일입니다.`);
+
+            userJoinDto.password = await this.bcryptProvider.hashPassword(userJoinDto.password);
+
+            return await this.userRepository.createUser(userJoinDto);
         } catch (err) {
-            console.log(err);
             throw err;
         }
-
-        console.log(result);
-
-        return userJoinDto;
     };
 
     /**  @param { UserLoginDto } userLoginDto  @returns { string } */
