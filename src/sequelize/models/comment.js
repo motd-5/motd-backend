@@ -13,8 +13,14 @@ module.exports = (sequelize, DataTypes) => {
     }
     Comment.init(
         {
-            userId: DataTypes.NUMBER,
+            commentId: {
+                type: DataTypes.INTEGER,
+                primaryKey: true,
+            },
+            userId: DataTypes.INTEGER,
             content: DataTypes.STRING,
+            createdAt: DataTypes.DATE,
+            updatedAt: DataTypes.DATE,
         },
         {
             sequelize,
