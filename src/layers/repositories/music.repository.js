@@ -1,6 +1,6 @@
 const { Music } = require('../../sequelize/models');
 const {
-    GetMusicDto,
+    GetMusicsDto,
     PostMusicDto,
     CustomException,
     ConflictException,
@@ -16,25 +16,44 @@ class MusicRepository extends BaseRepository {
 
     postMusics = async (postMusicDto) => {
         try {
-            // s3 변환 정보(musicUrl) 받아오고 Post DB에 저장
-            console.log(postMusicDto);
-            const post = await Music.create({
+            // (추후 추가)s3 변환 정보(musicUrl) 받아오고 Post DB에 저장
+            console.log('테스트', postMusicDto);
+            const music = await Music.create({
                 userId: postMusicDto.userId,
                 title: postMusicDto.title,
                 artist: postMusicDto.artist,
                 album: postMusicDto.album,
                 musicUrl: postMusicDto.musicValue,
             });
-            console.log('저장 성공!', post);
-            return;
+
+            const postDto = new PostMusicDto(music?.dataValues);
+
+            return postDto;
         } catch (err) {
             console.log(err);
             throw err;
         }
     };
 
-    getMusics = () => {
-        return 'happy';
+    getMusics = async (getMusicsDto) => {
+        try {
+            console.log(Music);
+            console.log('테스트', getMusicsDto);
+
+            const musics = await Music.findAll();
+
+            for (const music of musics) {
+                // const getAllMusic = music.dataValues;
+                console.log(music.dataValues);
+            }
+            // console.log(Object.keys(musics));
+            // const getDto = new GetMusicsDto(musics?.dataValues);
+            return;
+        } catch (err) {
+            console.log(err);
+            throw err;
+        }
+        return musics;
     };
 
     getOneMusic = () => {

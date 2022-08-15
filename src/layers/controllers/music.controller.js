@@ -9,11 +9,13 @@ class MusicController {
     formProvider;
     joiValidatorMusic;
     musicService;
+    // postMusicDto;
 
     constructor() {
         this.formProvider = new FormDtoProvider();
         this.joiValidator = new JoiValidator();
         this.musicService = new MusicService();
+        // this.postMusicDto = new PostMusicDto();
     }
 
     // 음악 생성
