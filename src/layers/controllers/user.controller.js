@@ -25,7 +25,7 @@ class UserController {
 
             return res.status(200).json(
                 this.formProvider.getSuccessFormDto('회원가입에 성공하셨습니다.', {
-                    result,
+                    user: result,
                 }),
             );
         } catch (err) {
@@ -33,7 +33,9 @@ class UserController {
 
             return res
                 .status(exception.statusCode)
-                .json(this.formProvider.getFailureFormDto(exception.message, { userJoinDto }));
+                .json(
+                    this.formProvider.getFailureFormDto(exception.message, { user: userJoinDto }),
+                );
         }
     };
 
@@ -57,7 +59,9 @@ class UserController {
 
             return res
                 .status(exception.statusCode)
-                .json(this.formProvider.getFailureFormDto(exception.message, { userLoginDto }));
+                .json(
+                    this.formProvider.getFailureFormDto(exception.message, { user: userLoginDto }),
+                );
         }
     };
 }
