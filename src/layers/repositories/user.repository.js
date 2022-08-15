@@ -33,16 +33,17 @@ class UserRepository extends BaseRepository {
             throw this.exeptionHandler(err);
         }
     };
+
     /**
      * @param { string } email
      * @throws { UnkownException | UnhandleMysqlSequelizeError }
-     * @returns { Promise< { email: string, password: string } | null > }
+     * @returns { Promise< { userId: number, nickname: string, password: string } | null > }
      */
-    findUserEmailAndPassword = async (email) => {
+    findUserWithPasswordByEmail = async (email) => {
         try {
             const findResult = await User.findOne({
                 where: { email },
-                attributes: ['userId', 'email', 'password'],
+                attributes: ['userId', 'email', 'nickname', 'password'],
             });
 
             if (findResult === null) return null;
@@ -50,7 +51,32 @@ class UserRepository extends BaseRepository {
                 return {
                     userId: +findResult?.dataValues?.userId,
                     email: findResult?.dataValues?.email,
+                    nickname: findResult?.dataValues?.nickname,
                     password: findResult?.dataValues?.password,
+                };
+        } catch (err) {
+            throw this.exeptionHandler(err);
+        }
+    };
+
+    /**
+     * @param { string } email
+     * @throws { UnkownException | UnhandleMysqlSequelizeError }
+     * @returns { Promise< { userId: number, nickname: string, password: string } | null > }
+     */
+    findUserWithoutPasswordByEmail = async (email) => {
+        try {
+            const findResult = await User.findOne({
+                where: { email },
+                attributes: ['userId', 'email', 'nickname'],
+            });
+
+            if (findResult === null) return null;
+            else
+                return {
+                    userId: +findResult?.dataValues?.userId,
+                    email: findResult?.dataValues?.email,
+                    nickname: findResult?.dataValues?.nickname,
                 };
         } catch (err) {
             throw this.exeptionHandler(err);
