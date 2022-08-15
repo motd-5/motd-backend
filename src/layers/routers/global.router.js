@@ -5,5 +5,6 @@ const globalRouter = Router();
 const userController = new UserController();
 
 globalRouter.post('/join', userController.join);
+globalRouter.post('/login', userController.login);
 
 module.exports = globalRouter;

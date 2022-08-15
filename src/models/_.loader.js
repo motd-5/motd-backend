@@ -15,6 +15,8 @@ const PostCommentDto = require('./dto/comment/post.comment.dto');
 
 const {
     CustomException,
+    ForbiddenException,
+    NotFoundException,
     ConflictException,
     UnkownException,
     UnhandleMysqlSequelizeError,
@@ -37,6 +39,8 @@ module.exports = {
     PostMusicDto,
 
     CustomException,
+    ForbiddenException,
+    NotFoundException,
     ConflictException,
     UnkownException,
     UnhandleMysqlSequelizeError,
