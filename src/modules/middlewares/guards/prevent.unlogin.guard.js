@@ -6,6 +6,6 @@ const e = require('express');
  * @param { e.Response } res
  * @param { e.NextFunction } next
  */
-const preventLoginGuard = () => {};
+const preventUnLoginGuard = () => {};
 
-module.exports = preventLoginGuard;
+module.exports = preventUnLoginGuard;

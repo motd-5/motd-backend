@@ -6,14 +6,14 @@ const BcryptProvider = require('./providers/bcrypt.provider');
 
 const corsMiddleware = require('./middlewares/cors/cors.middleware');
 const preventLoginGuard = require('./middlewares/guards/prevent.login.guard');
-const preventLoginGuard = require('./middlewares/guards/prevent.unlogin.guard');
+const preventUnLoginGuard = require('./middlewares/guards/prevent.unlogin.guard');
 
 module.exports = {
     exceptionHandler,
 
     corsMiddleware,
     preventLoginGuard,
-    preventLoginGuard,
+    preventUnLoginGuard,
 
     JoiValidator,
 
