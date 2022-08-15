@@ -4,8 +4,8 @@ const FailureFormDto = require('./dto/form/failure.form.dto');
 
 const BaseDto = require('./dto/base/base.dto');
 
+const UserDto = require('./dto/user/user.dto');
 const UserJoinDto = require('./dto/user/user.join.dto');
-
 const UserLoginDto = require('./dto/user/user.login.dto');
 
 const GetMusicDto = require('./dto/music/get.musics.dto');
@@ -17,6 +17,7 @@ const {
     CustomException,
     ConflictException,
     UnkownException,
+    UnhandleMysqlSequelizeError,
 } = require('./exception/custom.exception');
 
 module.exports = {
@@ -25,14 +26,18 @@ module.exports = {
     FailureFormDto,
 
     BaseDto,
-    UserJoinDto,
 
+    UserDto,
+    UserJoinDto,
     UserLoginDto,
+
     PostCommentDto,
+
     GetMusicDto,
     PostMusicDto,
 
     CustomException,
     ConflictException,
     UnkownException,
+    UnhandleMysqlSequelizeError,
 };
