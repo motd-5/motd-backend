@@ -8,16 +8,18 @@ const {
     NotFoundException,
     ForbiddenException,
 } = require('../../models/_.loader');
-const { BcryptProvider } = require('../../modules/_.loader');
+const { JwtProvider, BcryptProvider } = require('../../modules/_.loader');
 const UserRepository = require('../repositories/user.repository');
 
 class UserService {
     userRepository;
     bcryptProvider;
+    jwtProvider;
 
     constructor() {
         this.userRepository = new UserRepository();
         this.bcryptProvider = new BcryptProvider();
+        this.jwtProvider = new JwtProvider();
     }
 
     /**
@@ -43,13 +45,15 @@ class UserService {
     /**
      *
      * @param { UserLoginDto } userLoginDto
-     * @returns { Promise<string> } email
+     * @returns { Promise< { email: string, accessToken: string } > } email
      */
     login = async (userLoginDto) => {
         try {
-            const findedUser = await this.userRepository.findUserEmailAndPassword(
+            const findedUser = await this.userRepository.findUserWithPasswordByEmail(
                 userLoginDto.email,
             );
+            console.log(findedUser);
+
             if (findedUser === null)
                 throw new NotFoundException(`${userLoginDto.email} 은 존재하지 않는 이메일입니다.`);
             else {
@@ -60,7 +64,15 @@ class UserService {
                 if (!isCorrected)
                     throw new ForbiddenException(`${userLoginDto.email} 의 비밀번호가 틀렸습니다.`);
 
-                return findedUser.email;
+                const accessToken = this.jwtProvider.sign({
+                    userId: findedUser.userId,
+                    nickname: findedUser.nickname,
+                });
+
+                return {
+                    email: findedUser.email,
+                    accessToken,
+                };
             }
         } catch (err) {
             throw err;
