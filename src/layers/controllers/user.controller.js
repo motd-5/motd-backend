@@ -44,11 +44,14 @@ class UserController {
         try {
             await this.joiValidator.validate(userLoginDto);
 
-            const email = await this.userService.login(userLoginDto);
+            const result = await this.userService.login(userLoginDto);
 
-            return res
-                .status(200)
-                .json(this.formProvider.getSuccessFormDto('로그인에 성공하셨습니다.', { email }));
+            return res.status(200).json(
+                this.formProvider.getSuccessFormDto('로그인에 성공하셨습니다.', {
+                    user: { email: result.email },
+                    accessToken: result.accessToken,
+                }),
+            );
         } catch (err) {
             const exception = exceptionHandler(err);
 
