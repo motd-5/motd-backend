@@ -7,4 +7,5 @@ const musicController = new MusicController();
 
 musicRouter.get('', musicController.getMusics);
 musicRouter.post('', musicController.postMusics);
+musicRouter.get('/:musicId', musicController.getOneMusic);
 module.exports = musicRouter;

@@ -1,4 +1,4 @@
-const { SuccessFomrDto, FailureFormDto } = require('../../models/_.loader');
+const { SuccessFormDto, FailureFormDto } = require('../../models/_.loader');
 
 class FormDtoProvider {
     constructor() {}
@@ -8,7 +8,7 @@ class FormDtoProvider {
      * @param { object } result
      */
     getSuccessFormDto(message, result = {}) {
-        return new SuccessFomrDto(message, result);
+        return new SuccessFormDto(message, result);
     }
 
     /**

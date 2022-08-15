@@ -24,6 +24,9 @@ class ConflictException extends CustomException {
     }
 }
 
+/**
+ * @property statusCode 500
+ */
 class UnkownException extends CustomException {
     constructor(message) {
         super(message);
@@ -33,8 +36,21 @@ class UnkownException extends CustomException {
     }
 }
 
+/**
+ * @property statusCode 500
+ */
+class UnhandleMysqlSequelizeError extends CustomException {
+    constructor(message) {
+        super(message);
+
+        this.name = 'UnhandleMysqlSequelizeError';
+        this.statusCode = 500;
+    }
+}
+
 module.exports = {
     CustomException,
     ConflictException,
     UnkownException,
+    UnhandleMysqlSequelizeError,
 };
