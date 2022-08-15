@@ -13,6 +13,30 @@ class CustomException extends Error {
 }
 
 /**
+ * @property statusCode 403
+ */
+class ForbiddenException extends CustomException {
+    constructor(message) {
+        super(message);
+
+        this.name = 'ForbiddenException';
+        this.statusCode = 403;
+    }
+}
+
+/**
+ * @property statusCode 404
+ */
+class NotFoundException extends CustomException {
+    constructor(message) {
+        super(message);
+
+        this.name = 'NotFoundException';
+        this.statusCode = 404;
+    }
+}
+
+/**
  * @property statusCode 409
  */
 class ConflictException extends CustomException {
@@ -50,6 +74,8 @@ class UnhandleMysqlSequelizeError extends CustomException {
 
 module.exports = {
     CustomException,
+    ForbiddenException,
+    NotFoundException,
     ConflictException,
     UnkownException,
     UnhandleMysqlSequelizeError,
