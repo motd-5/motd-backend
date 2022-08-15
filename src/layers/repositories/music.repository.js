@@ -1,14 +1,36 @@
-const sequelize = require('sequelize');
-const { Music } = require('../../sequelize/models/music')(sequelize, DataTypes);
+const { Music } = require('../../sequelize/models');
+const {
+    GetMusicDto,
+    PostMusicDto,
+    CustomException,
+    ConflictException,
+    UnkownException,
+    UnhandleMysqlSequelizeError,
+} = require('../../models/_.loader');
+const BaseRepository = require('./base.repository');
 
-class MusicRepository {
-    // repository는 mongoose의 findbyid와 비슷 (id 기준으로 단일 문서 조회)
-    constructor() {}
+class MusicRepository extends BaseRepository {
+    constructor() {
+        super();
+    }
 
-    postMusics = async (title, artist, album, musicUrl) => {
-        // const post = await Music.create;
-        // console.log('저장 성공!', post);
-        return 'hello';
+    postMusics = async (postMusicDto) => {
+        try {
+            // s3 변환 정보(musicUrl) 받아오고 Post DB에 저장
+            console.log(postMusicDto);
+            const post = await Music.create({
+                userId: postMusicDto.userId,
+                title: postMusicDto.title,
+                artist: postMusicDto.artist,
+                album: postMusicDto.album,
+                musicUrl: postMusicDto.musicValue,
+            });
+            console.log('저장 성공!', post);
+            return;
+        } catch (err) {
+            console.log(err);
+            throw err;
+        }
     };
 
     getMusics = () => {

@@ -10,7 +10,7 @@ class MusicService {
 
     /** @param { PostMusicDto } postMusicDto @return { string }*/
     postMusics = async (postMusicDto) => {
-        const result = this.musicRepository.postMusics();
+        const result = await this.musicRepository.postMusics(postMusicDto);
 
         return result;
     };
