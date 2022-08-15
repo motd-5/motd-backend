@@ -14,16 +14,39 @@ module.exports = (sequelize, DataTypes) => {
     Music.init(
         {
             musicId: {
+                allowNull: false,
+                autoIncrement: true,
                 type: DataTypes.INTEGER,
                 primaryKey: true,
             },
-            userId: DataTypes.INTEGER,
-            title: DataTypes.STRING,
-            artist: DataTypes.STRING,
-            album: DataTypes.STRING,
-            musicUrl: DataTypes.STRING,
-            createdAt: DataTypes.DATE,
-            updatedAt: DataTypes.DATE,
+            userId: {
+                allowNull: false,
+                type: DataTypes.INTEGER,
+            },
+            title: {
+                allowNull: false,
+                type: DataTypes.STRING,
+            },
+            artist: {
+                allowNull: false,
+                type: DataTypes.STRING,
+            },
+            album: {
+                allowNull: false,
+                type: DataTypes.STRING,
+            },
+            musicUrl: {
+                allowNull: false,
+                type: DataTypes.STRING,
+            },
+            createdAt: {
+                allowNull: false,
+                type: DataTypes.DATE,
+            },
+            updatedAt: {
+                allowNull: false,
+                type: DataTypes.DATE,
+            },
         },
         {
             sequelize,

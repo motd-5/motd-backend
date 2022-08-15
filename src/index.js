@@ -2,7 +2,7 @@ const morgan = require('morgan');
 const express = require('express');
 
 // TS 님의 Contritubte...., 아래 명령어 실행하면 migrate 자동실행
-// const { sequelize } = require('./sequelize/models');
+const { sequelize } = require('./sequelize/models');
 // sequelize.sync({ force: true });
 
 const { globalRouter, musicRouter, commentRouter } = require('./layers/_.loader');
