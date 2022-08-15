@@ -9,20 +9,30 @@ class MusicController {
     formProvider;
     joiValidatorMusic;
     musicService;
+    // postMusicDto;
 
     constructor() {
         this.formProvider = new FormDtoProvider();
         this.joiValidator = new JoiValidator();
         this.musicService = new MusicService();
+        // this.postMusicDto = new PostMusicDto();
     }
 
     // 음악 생성
     postMusics = async (req, res, next) => {
+        const userId = 1;
+        const { title, artist, album, musicValue } = req.body;
         try {
-            const postMusicDto = new PostMusicDto(req.body);
+            const postMusicDto = new PostMusicDto({
+                userId,
+                title,
+                artist,
+                album,
+                musicValue,
+            });
             this.joiValidator.validate(postMusicDto);
 
-            const music = await this.musicService.postMusics(PostMusicDto);
+            const music = await this.musicService.postMusics(postMusicDto);
 
             return res.status(200).json(
                 this.formProvider.getSuccessFormDto('노래 생성에 성공했습니다.', {

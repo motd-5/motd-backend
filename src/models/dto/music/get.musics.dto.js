@@ -2,27 +2,16 @@ const joi = require('joi');
 const BaseDto = require('../base/base.dto');
 
 class GetMusicsDto extends BaseDto {
-    title;
-    artist;
-    album;
-    musicUrl;
+    page;
+    pageCount;
 
-    constructor({ title, artist, album, musicUrl }) {
+    constructor({}) {
         super();
-        this.title = title;
-        this.artist = artist;
-        this.album = album;
-        this.musicUrl = musicUrl;
+        this.page = page;
+        this.pageCount = pageCount;
     }
 
-    getJoiInstance() {
-        return {
-            title: joi.string().required(),
-            artist: joi.string().required(),
-            album: joi.string().required(),
-            musicUrl: joi.string().required(),
-        };
-    }
+    // Dto는 핊요한 요소들을 꺼내오는 자원
 }
 
 module.exports = GetMusicsDto;
