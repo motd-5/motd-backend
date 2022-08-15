@@ -3,6 +3,7 @@ const JwtLib = require('jsonwebtoken');
 class JwtProvider {
     static SECRET = 'sample_secret';
     static ALGORITHM = 'HS256';
+    static EXPIRES_IN = '2h';
 
     constructor() {}
 
@@ -21,6 +22,7 @@ class JwtProvider {
     sign(payload) {
         return JwtLib.sign(payload, JwtProvider.SECRET, {
             algorithm: JwtProvider.ALGORITHM,
+            expiresIn: JwtProvider.EXPIRES_IN,
         });
     }
 
