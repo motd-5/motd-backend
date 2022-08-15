@@ -1,4 +1,4 @@
-const JsonToken = require('jsonwebtoken');
+const JwtLib = require('jsonwebtoken');
 
 class JwtProvider {
     static SECRET = 'sample_secret';
@@ -19,7 +19,7 @@ class JwtProvider {
      * @returns { string }
      */
     sign(payload) {
-        return Jwt.sign(payload, JwtProvider.SECRET, {
+        return JwtLib.sign(payload, JwtProvider.SECRET, {
             algorithm: JwtProvider.ALGORITHM,
         });
     }
@@ -30,7 +30,7 @@ class JwtProvider {
      * @throws `JsonWebTokenError`: invalid signature
      */
     verifyToken(token) {
-        return Jwt.verify(token, JwtProvider.SECRET);
+        return JwtLib.verify(token, JwtProvider.SECRET);
     }
 
     /**
@@ -38,7 +38,7 @@ class JwtProvider {
      * @returns { string | Jwt.payload}
      */
     decodeToken(token) {
-        return Jwt.decode(token);
+        return JwtLib.decode(token);
     }
 
     /**
