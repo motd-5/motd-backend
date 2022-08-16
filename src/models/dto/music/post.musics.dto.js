@@ -6,15 +6,15 @@ class PostMusicsDto extends BaseDto {
     title;
     artist;
     album;
-    musicValue;
+    musicUrl;
 
-    constructor({ userId, title, artist, album, musicValue }) {
+    constructor({ userId, title, artist, album, musicUrl }) {
         super();
         this.userId = userId;
         this.title = title;
         this.artist = artist;
         this.album = album;
-        this.musicValue = musicValue;
+        this.musicUrl = musicUrl;
     }
 
     getJoiInstance() {
@@ -23,7 +23,7 @@ class PostMusicsDto extends BaseDto {
             title: joi.string().required(),
             artist: joi.string().required(),
             album: joi.string().required(),
-            musicValue: joi.string().required(),
+            musicUrl: joi.string().required(),
         };
     }
 }

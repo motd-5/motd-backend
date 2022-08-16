@@ -16,6 +16,26 @@ class UserRepository extends BaseRepository {
 
     /**
      *
+     * @param { number } userId
+     * @throws { UnkownException | UnhandleMysqlSequelizeError }
+     * @returns { Promise<boolean> }
+     */
+    isExistsUserById = async (userId) => {
+        try {
+            const findResult = await User.findOne({
+                where: { userId },
+                attributes: ['userId'],
+            });
+
+            if (findResult === null) return false;
+            else return true;
+        } catch (err) {
+            throw this.exeptionHandler(err);
+        }
+    };
+
+    /**
+     *
      * @param { string } email
      * @throws { UnkownException | UnhandleMysqlSequelizeError }
      * @returns { Promise<boolean> }
