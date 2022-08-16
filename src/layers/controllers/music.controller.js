@@ -1,7 +1,13 @@
 const e = require('express');
 const joi = require('joi');
+
 const MusicService = require('../services/music.service');
-const { GetMusicDto, PostMusicDto } = require('../../models/_.loader');
+const {
+    GetMusicDto,
+    PostMusicDto,
+    BadRequestException,
+    UnkownException,
+} = require('../../models/_.loader');
 const { FormDtoProvider, JoiValidator, exceptionHandler } = require('../../modules/_.loader');
 // const etMusicsDto = require('../../models/dto/music/get.musics.dto');
 
@@ -21,24 +27,21 @@ class MusicController {
     // 음악 생성
     postMusics = async (req, res, next) => {
         const userId = 1;
-        const { title, artist, album, musicValue } = req.body;
+        const { title, artist, album } = req.query;
+
         try {
-            const postMusicDto = new PostMusicDto({
-                userId,
-                title,
-                artist,
-                album,
-                musicValue,
-            });
+            const musicUrl = req?.file?.location;
+            if (musicUrl === undefined)
+                throw new UnkownException('알 수 없는 이유로 업로드에 실패하였습니다.');
+
+            const postMusicDto = new PostMusicDto({ userId, title, artist, album, musicUrl });
             this.joiValidator.validate(postMusicDto);
 
             const music = await this.musicService.postMusics(postMusicDto);
 
-            return res.status(200).json(
-                this.formProvider.getSuccessFormDto('노래 생성에 성공했습니다.', {
-                    music,
-                }),
-            );
+            return res
+                .status(200)
+                .json(this.formProvider.getSuccessFormDto('노래 생성에 성공했습니다.', { music }));
         } catch (err) {
             const exception = exceptionHandler(err);
 
@@ -69,9 +72,9 @@ class MusicController {
 
     // 음악 상세 조회
     getOneMusic = async (req, res, next) => {
-        const musicId = 1;
         try {
-            const musicOne = await this.musicService.getOneMusic();
+            const musicId = this.joiValidator.validateNumber(req?.params?.musicId);
+            const musicOne = await this.musicService.getOneMusic(musicId);
 
             return res.status(200).json(
                 this.formProvider.getSuccessFormDto('노래 상세 조회에 성공했습니다.', {
