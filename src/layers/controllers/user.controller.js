@@ -64,6 +64,25 @@ class UserController {
                 );
         }
     };
+
+    /** @param { e.Request } req   @param { e.Response } res  @param { e.NextFunction } next */
+    getMyUploadedMusics = (req, res, next) => {
+        console.log(req.body);
+        console.log('getMyUploadMusic');
+        return res.json('test message');
+    };
+
+    /** @param { e.Request } req   @param { e.Response } res  @param { e.NextFunction } next */
+    getMyLikedMusics = (req, res, next) => {
+        console.log('getMyLikeMusic');
+        return res.json('test message');
+    };
+
+    /** @param { e.Request } req   @param { e.Response } res  @param { e.NextFunction } next */
+    getMyLikedPosts = (req, res, next) => {
+        console.log('getMyLikePosts');
+        return res.json('test message');
+    };
 }
 
 module.exports = UserController;
