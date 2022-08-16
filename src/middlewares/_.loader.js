@@ -1,6 +1,6 @@
 const corsMiddleware = require('./cors/cors.middleware');
-const preventLoginGuard = require('./guard/prevent.login.guard');
-const preventUnLoginGuard = require('./guard/prevent.un.login.guard');
+const preventLoginGuard = require('./guards/prevent.login.guard');
+const preventUnLoginGuard = require('./guards/prevent.unlogin.guard');
 
 module.exports = {
     corsMiddleware,
