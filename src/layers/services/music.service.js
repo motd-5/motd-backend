@@ -3,9 +3,11 @@ const MusicRepository = require('../repositories/music.repository');
 
 class MusicService {
     musicRepository;
+    // postMusicDto;
 
     constructor() {
         this.musicRepository = new MusicRepository();
+        // this.postMusicDto = new PostMusicDto();
     }
 
     /** @param { PostMusicDto } postMusicDto @return { string }*/
@@ -17,16 +19,16 @@ class MusicService {
 
     /** @param { GetMusicDto } getMusicDto @return { string }*/
     getMusics = async (getMusics) => {
-        const result = this.musicRepository.getMusics();
+        const result = await this.musicRepository.getMusics();
 
         return result;
     };
 
-    /** @param { GetMusicDto } getMusicDto @return { string }*/
-    getOneMusic = async (getOneMusic) => {
-        const result = this.musicRepository.getOneMusic();
+    /** @param { number } musicId @return { string }*/
+    getOneMusic = async (musicId) => {
+        const result = await this.musicRepository.getOneMusic(musicId);
 
-        return result;
+        return musicId;
     };
 }
 

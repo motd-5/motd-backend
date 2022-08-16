@@ -1,6 +1,7 @@
 node_modules/
 coverage/
 config/
+key/
 
 # If you clone this poilerplates
 # Please apply these files
@@ -8,6 +9,5 @@ config/
 .env
 *.env
 *.env.*
-.gitignore
 
 **/config.json

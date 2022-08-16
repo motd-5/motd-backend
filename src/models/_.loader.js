@@ -8,13 +8,20 @@ const UserDto = require('./dto/user/user.dto');
 const UserJoinDto = require('./dto/user/user.join.dto');
 const UserLoginDto = require('./dto/user/user.login.dto');
 
-const GetMusicDto = require('./dto/music/get.musics.dto');
+const GetMusicsDto = require('./dto/music/get.musics.dto');
 const PostMusicDto = require('./dto/music/post.musics.dto');
 
-const PostCommentDto = require('./dto/comment/post.comment.dto');
+const GetCommentsDto = require('./dto/comment/get.comments.dto');
+const PostCommentsDto = require('./dto/comment/post.comments.dto');
+const DeleteCommentsDto = require('./dto/comment/delete.comments.dto');
+const UpdateCommentsDto = require('./dto/comment/update.comments.dto');
 
 const {
     CustomException,
+    BadRequestException,
+    UnauthorizedException,
+    ForbiddenException,
+    NotFoundException,
     ConflictException,
     UnkownException,
     UnhandleMysqlSequelizeError,
@@ -31,12 +38,19 @@ module.exports = {
     UserJoinDto,
     UserLoginDto,
 
-    PostCommentDto,
+    PostCommentsDto,
+    GetCommentsDto,
+    UpdateCommentsDto,
+    DeleteCommentsDto,
 
-    GetMusicDto,
+    GetMusicsDto,
     PostMusicDto,
 
     CustomException,
+    BadRequestException,
+    UnauthorizedException,
+    ForbiddenException,
+    NotFoundException,
     ConflictException,
     UnkownException,
     UnhandleMysqlSequelizeError,

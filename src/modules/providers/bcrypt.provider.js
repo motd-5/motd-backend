@@ -18,7 +18,12 @@ class BcryptProvider {
      * @returns
      */
     async hashPassword(password) {
-        return await Bcrypt.hash(password, BcryptProvider.SALT);
+        try {
+            return await Bcrypt.hash(password, BcryptProvider.SALT);
+        } catch (err) {
+            // 성공 실패와 무관하게 비동기 함수 자체의 에러 발생 가능성...
+            throw err;
+        }
     }
 
     /**
@@ -29,7 +34,12 @@ class BcryptProvider {
      * @returns boolean
      */
     async isCorrectPassword(password, hashedPassword) {
-        return await Bcrypt.compare(password, hashedPassword);
+        try {
+            return await Bcrypt.compare(password, hashedPassword);
+        } catch (err) {
+            // 성공 실패와 무관하게 비동기 함수 자체의 에러 발생 가능성...
+            throw err;
+        }
     }
 }
 

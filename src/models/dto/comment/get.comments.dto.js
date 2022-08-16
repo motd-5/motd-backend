@@ -1,7 +1,7 @@
 const joi = require('joi');
 const BaseDto = require('../base/base.dto');
 
-class GetMusicsDto extends BaseDto {
+class GetCommentsDto extends BaseDto {
     page;
     pageCount;
 
@@ -14,4 +14,4 @@ class GetMusicsDto extends BaseDto {
     // Dto는 핊요한 요소들을 꺼내오는 자원
 }
 
-module.exports = GetMusicsDto;
+module.exports = GetCommentsDto;

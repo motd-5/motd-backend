@@ -16,6 +16,26 @@ class UserRepository extends BaseRepository {
 
     /**
      *
+     * @param { number } userId
+     * @throws { UnkownException | UnhandleMysqlSequelizeError }
+     * @returns { Promise<boolean> }
+     */
+    isExistsUserById = async (userId) => {
+        try {
+            const findResult = await User.findOne({
+                where: { userId },
+                attributes: ['userId'],
+            });
+
+            if (findResult === null) return false;
+            else return true;
+        } catch (err) {
+            throw this.exeptionHandler(err);
+        }
+    };
+
+    /**
+     *
      * @param { string } email
      * @throws { UnkownException | UnhandleMysqlSequelizeError }
      * @returns { Promise<boolean> }
@@ -35,6 +55,55 @@ class UserRepository extends BaseRepository {
     };
 
     /**
+     * @param { string } email
+     * @throws { UnkownException | UnhandleMysqlSequelizeError }
+     * @returns { Promise< { userId: number, nickname: string, password: string } | null > }
+     */
+    findUserWithPasswordByEmail = async (email) => {
+        try {
+            const findResult = await User.findOne({
+                where: { email },
+                attributes: ['userId', 'email', 'nickname', 'password'],
+            });
+
+            if (findResult === null) return null;
+            else
+                return {
+                    userId: +findResult?.dataValues?.userId,
+                    email: findResult?.dataValues?.email,
+                    nickname: findResult?.dataValues?.nickname,
+                    password: findResult?.dataValues?.password,
+                };
+        } catch (err) {
+            throw this.exeptionHandler(err);
+        }
+    };
+
+    /**
+     * @param { string } email
+     * @throws { UnkownException | UnhandleMysqlSequelizeError }
+     * @returns { Promise< { userId: number, nickname: string, password: string } | null > }
+     */
+    findUserWithoutPasswordByEmail = async (email) => {
+        try {
+            const findResult = await User.findOne({
+                where: { email },
+                attributes: ['userId', 'email', 'nickname'],
+            });
+
+            if (findResult === null) return null;
+            else
+                return {
+                    userId: +findResult?.dataValues?.userId,
+                    email: findResult?.dataValues?.email,
+                    nickname: findResult?.dataValues?.nickname,
+                };
+        } catch (err) {
+            throw this.exeptionHandler(err);
+        }
+    };
+
+    /**
      *
      * @param { UserJoinDto } userJoinDto
      * @throws { ConflictException | UnkownException | UnhandleMysqlSequelizeError }
@@ -48,7 +117,9 @@ class UserRepository extends BaseRepository {
                 password: userJoinDto.password,
             });
 
-            return new UserDto(result?.dataValues);
+            const userDto = new UserDto(result?.dataValues);
+
+            return userDto;
         } catch (err) {
             if (err?.original?.code === 'ER_DUP_ENTRY')
                 throw new ConflictException(`${userJoinDto.email} 은 사용 중인 이메일입니다.`);

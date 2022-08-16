@@ -13,6 +13,54 @@ class CustomException extends Error {
 }
 
 /**
+ * @property statusCode 401
+ */
+class BadRequestException extends CustomException {
+    constructor(message) {
+        super(message);
+
+        this.name = 'UnauthorizedException';
+        this.statusCode = 400;
+    }
+}
+
+/**
+ * @property statusCode 401
+ */
+class UnauthorizedException extends CustomException {
+    constructor(message) {
+        super(message);
+
+        this.name = 'UnauthorizedException';
+        this.statusCode = 401;
+    }
+}
+
+/**
+ * @property statusCode 403
+ */
+class ForbiddenException extends CustomException {
+    constructor(message) {
+        super(message);
+
+        this.name = 'ForbiddenException';
+        this.statusCode = 403;
+    }
+}
+
+/**
+ * @property statusCode 404
+ */
+class NotFoundException extends CustomException {
+    constructor(message) {
+        super(message);
+
+        this.name = 'NotFoundException';
+        this.statusCode = 404;
+    }
+}
+
+/**
  * @property statusCode 409
  */
 class ConflictException extends CustomException {
@@ -50,6 +98,10 @@ class UnhandleMysqlSequelizeError extends CustomException {
 
 module.exports = {
     CustomException,
+    BadRequestException,
+    UnauthorizedException,
+    ForbiddenException,
+    NotFoundException,
     ConflictException,
     UnkownException,
     UnhandleMysqlSequelizeError,

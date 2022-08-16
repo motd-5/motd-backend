@@ -23,19 +23,19 @@ class UserController {
 
             const result = await this.userService.join(userJoinDto);
 
-            return res
-                .status(200)
-                .json(
-                    this.formProvider.getSuccessFormDto('회원가입에 성공하셨습니다.', {
-                        userJoinDto,
-                    }),
-                );
+            return res.status(200).json(
+                this.formProvider.getSuccessFormDto('회원가입에 성공하셨습니다.', {
+                    user: result,
+                }),
+            );
         } catch (err) {
             const exception = exceptionHandler(err);
 
             return res
                 .status(exception.statusCode)
-                .json(this.formProvider.getFailureFormDto(exception.message, { userJoinDto }));
+                .json(
+                    this.formProvider.getFailureFormDto(exception.message, { user: userJoinDto }),
+                );
         }
     };
 
@@ -44,19 +44,24 @@ class UserController {
         const userLoginDto = new UserLoginDto(req.body);
 
         try {
-            this.joiValidator.validate(userLoginDto);
+            await this.joiValidator.validate(userLoginDto);
 
             const result = await this.userService.login(userLoginDto);
 
-            return res
-                .status(200)
-                .json(this.formProvider.getSuccessFormDto('회원가입에 성공하셨습니다.', { user }));
+            return res.status(200).json(
+                this.formProvider.getSuccessFormDto('로그인에 성공하셨습니다.', {
+                    user: { email: result.email },
+                    accessToken: result.accessToken,
+                }),
+            );
         } catch (err) {
             const exception = exceptionHandler(err);
 
             return res
                 .status(exception.statusCode)
-                .json(this.formProvider.getFailureFormDto(exception.message, { userLoginDto }));
+                .json(
+                    this.formProvider.getFailureFormDto(exception.message, { user: userLoginDto }),
+                );
         }
     };
 }
