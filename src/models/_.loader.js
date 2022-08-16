@@ -15,6 +15,7 @@ const PostCommentDto = require('./dto/comment/post.comment.dto');
 
 const {
     CustomException,
+    BadRequestException,
     UnauthorizedException,
     ForbiddenException,
     NotFoundException,
@@ -40,6 +41,7 @@ module.exports = {
     PostMusicDto,
 
     CustomException,
+    BadRequestException,
     UnauthorizedException,
     ForbiddenException,
     NotFoundException,
