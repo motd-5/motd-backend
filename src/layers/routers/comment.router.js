@@ -1,10 +1,13 @@
 const { Router } = require('express');
 
 const CommentController = require('../controllers/comment.controller');
-const commentController = new CommentController();
 
 const commentRouter = Router();
+const commentController = new CommentController();
 
-commentRouter.post('', commentController.createComment);
+commentRouter.get('', commentController.getComments);
+commentRouter.post('', commentController.postComments);
+commentRouter.put('/:commentId', commentController.updateComments);
+commentRouter.delete('/:comentId', commentController.deleteComments);
 
 module.exports = commentRouter;
