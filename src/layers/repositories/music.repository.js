@@ -1,6 +1,6 @@
 const { Music } = require('../../sequelize/models');
 const {
-    GetMusicsDto,
+    // GetMusicsDto,
     PostMusicDto,
     CustomException,
     ConflictException,
@@ -40,21 +40,23 @@ class MusicRepository extends BaseRepository {
             console.log('테스트', getMusicsDto);
 
             const musics = await Music.findAll();
-
+            // console.log(musics);
             // const getAllMusic = musics.dataValues;
+            console.log(Object.keys(musics));
 
+            const musicList = [];
             for (const music of musics) {
-                // const getAllMusic = music.dataValues;
-                console.log(music.dataValues);
+                musicList.push(music.dataValues);
+                // console.log(getAllMusic);
             }
-            // console.log(Object.keys(musics));
+
+            return musicList;
+            // console.log(music.dataValues);
             // const getDto = new GetMusicsDto(musics?.dataValues);
-            return;
         } catch (err) {
             console.log(err);
             throw err;
         }
-        return musics;
     };
 
     /**
@@ -69,7 +71,7 @@ class MusicRepository extends BaseRepository {
         });
         console.log(findResult);
 
-        return 'smile';
+        return findResult;
     };
 }
 
