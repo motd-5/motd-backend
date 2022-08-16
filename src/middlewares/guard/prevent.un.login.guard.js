@@ -6,8 +6,8 @@ const e = require('express');
  * @param { e.Response } res
  * @param { e.NextFunction } next
  */
-const corsMiddleware = (req, res, next) => {
+const preventLoginGuard = (req, res, next) => {
     return next();
 };
 
-module.exports = corsMiddleware;
+module.exports = preventLoginGuard;
