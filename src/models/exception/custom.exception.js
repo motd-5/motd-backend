@@ -12,6 +12,21 @@ class CustomException extends Error {
     }
 }
 
+/**
+ * @property statusCode 401
+ */
+class BadRequestException extends CustomException {
+    constructor(message) {
+        super(message);
+
+        this.name = 'UnauthorizedException';
+        this.statusCode = 400;
+    }
+}
+
+/**
+ * @property statusCode 401
+ */
 class UnauthorizedException extends CustomException {
     constructor(message) {
         super(message);
@@ -83,6 +98,7 @@ class UnhandleMysqlSequelizeError extends CustomException {
 
 module.exports = {
     CustomException,
+    BadRequestException,
     UnauthorizedException,
     ForbiddenException,
     NotFoundException,
