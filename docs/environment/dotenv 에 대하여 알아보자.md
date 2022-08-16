@@ -53,6 +53,8 @@ function _resolveHome(envPath) {
 > -   ~ 로 시작하는 경로를 입력하면 OS 의 기본 경로, _Win 대부분은 `C 드라이브`_, 에서 시작되는 파일을 탐색을 합니다.
 > -   그렇지 않은 경우에는 `options.path` 값을 그대로 사용하게 됩니다.
 
+<hr><br>
+
 분기 처리 뒷 부분을 보면, 파일을 읽기 위해서 사용 되는 fs 모듈이 사용되어 있습니다.
 
 <p align="center;"><img src="./env.config.lib.4.png" style="width: 600px"/></p>
