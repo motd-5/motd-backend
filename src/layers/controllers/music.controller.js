@@ -23,20 +23,20 @@ class MusicController {
         const userId = 1;
         const { title, artist, album, musicValue } = req.body;
         try {
-            const postMusicDto = new PostMusicDto({
-                userId,
-                title,
-                artist,
-                album,
-                musicValue,
-            });
-            this.joiValidator.validate(postMusicDto);
+            // const postMusicDto = new PostMusicDto({
+            //     userId,
+            //     title,
+            //     artist,
+            //     album,
+            //     musicValue,
+            // });
+            // this.joiValidator.validate(postMusicDto);
 
-            const music = await this.musicService.postMusics(postMusicDto);
+            // const music = await this.musicService.postMusics(postMusicDto);
 
             return res.status(200).json(
                 this.formProvider.getSuccessFormDto('노래 생성에 성공했습니다.', {
-                    music,
+                    file: req.file,
                 }),
             );
         } catch (err) {
