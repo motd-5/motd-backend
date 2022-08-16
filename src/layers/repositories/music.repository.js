@@ -42,6 +42,8 @@ class MusicRepository extends BaseRepository {
 
             const musics = await Music.findAll();
 
+            // const getAllMusic = musics.dataValues;
+
             for (const music of musics) {
                 // const getAllMusic = music.dataValues;
                 console.log(music.dataValues);
