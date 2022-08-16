@@ -14,21 +14,20 @@ class MusicRepository extends BaseRepository {
         super();
     }
 
+    /** @param { PostMusicDto } postMusicDto @returns */
     postMusics = async (postMusicDto) => {
         try {
             // (추후 추가)s3 변환 정보(musicUrl) 받아오고 Post DB에 저장
-            console.log('테스트', postMusicDto);
+
             const music = await Music.create({
                 userId: postMusicDto.userId,
                 title: postMusicDto.title,
                 artist: postMusicDto.artist,
                 album: postMusicDto.album,
-                musicUrl: postMusicDto.musicValue,
+                musicUrl: postMusicDto.musicUrl,
             });
 
-            const postDto = new PostMusicDto(music?.dataValues);
-
-            return postDto;
+            return music;
         } catch (err) {
             console.log(err);
             throw err;
