@@ -1,5 +1,7 @@
 const e = require('express');
+
 const { FormDtoProvider, JwtProvider } = require('../../modules/_.loader');
+const UserPository = require('../../layers/repositories/user.repository');
 
 /**
  *
@@ -22,12 +24,18 @@ const preventUnLoginGuard = (req, res, next) => {
     } else {
         const jwtProvider = new JwtProvider();
 
-        const pyaload = jwtProvider.verifyToken(jwtProvider.extract(bearer));
+        try {
+            const payload = jwtProvider.verifyToken(jwtProvider.extract(bearer));
+            req.body.username = payload.userId;
+            req.body.nickname = payload.nickname;
 
-        req.body.username = pyaload.userId;
-        req.body.nickname = pyaload.nickname;
+            const isExists = new UserPository().isExistsUserById(payload.userId);
+            if (!isExists) return res.json('존재하지 않는 유저입니다.');
 
-        return next();
+            return next();
+        } catch (err) {
+            return res.json('알 수 없는 에러');
+        }
     }
 };
 
