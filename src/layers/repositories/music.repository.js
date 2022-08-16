@@ -55,8 +55,18 @@ class MusicRepository extends BaseRepository {
         return musics;
     };
 
-    getOneMusic = () => {
-        console.log('왜 안 되니?');
+    /**
+     * @param { number } musicId
+     */
+    getOneMusic = async (musicId) => {
+        console.log(musicId);
+
+        const findResult = await Music.findOne({
+            where: { musicId },
+            attributes: ['musicId', 'title', 'artist', 'album', 'musicUrl'],
+        });
+        console.log(findResult);
+
         return 'smile';
     };
 }

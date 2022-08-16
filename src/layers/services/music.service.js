@@ -24,11 +24,11 @@ class MusicService {
         return result;
     };
 
-    /** @param { GetMusicDto } getMusicDto @return { string }*/
-    getOneMusic = async (getOneMusic) => {
-        const result = await this.musicRepository.getOneMusic();
+    /** @param { number } musicId @return { string }*/
+    getOneMusic = async (musicId) => {
+        const result = await this.musicRepository.getOneMusic(musicId);
 
-        return result;
+        return musicId;
     };
 }
 

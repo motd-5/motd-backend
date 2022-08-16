@@ -1,5 +1,6 @@
 const e = require('express');
 const joi = require('joi');
+
 const MusicService = require('../services/music.service');
 const {
     GetMusicDto,
@@ -71,9 +72,9 @@ class MusicController {
 
     // 음악 상세 조회
     getOneMusic = async (req, res, next) => {
-        const musicId = 1;
         try {
-            const musicOne = await this.musicService.getOneMusic();
+            const musicId = this.joiValidator.validateNumber(req?.params?.musicId);
+            const musicOne = await this.musicService.getOneMusic(musicId);
 
             return res.status(200).json(
                 this.formProvider.getSuccessFormDto('노래 상세 조회에 성공했습니다.', {
