@@ -2,22 +2,27 @@ const joi = require('joi');
 const BaseDto = require('../base/base.dto');
 
 class PostCommentDto extends BaseDto {
-    /** @type  { number } */
+    /** @type { number } */
+    userId;
+
+    /** @type { number } */
     musicId;
 
-    /** @type  { string } */
+    /** @type { string } */
     content;
 
-    /** @param { { musicId: number, content: string } } IUserDto */
-    constructor({ musicId, content }) {
+    /** @param { { userId: number, musicId: number, content: string } } IUserDto */
+    constructor({ userId, musicId, content }) {
         super();
 
+        this.userId = userId;
         this.musicId = musicId;
         this.content = content;
     }
 
     getJoiInstance() {
         return {
+            userId: joi.number().required(),
             musicId: joi.number().required(),
             content: joi.string().required(),
         };
