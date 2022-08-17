@@ -8,6 +8,7 @@ const {
     UnkownException,
     UnhandleMysqlSequelizeError,
     NotFoundException,
+    GetMusicsDto,
 } = require('../../models/_.loader');
 const BaseRepository = require('./base.repository');
 
@@ -36,12 +37,16 @@ class MusicRepository extends BaseRepository {
         }
     };
 
+    /** @param { GetMusicsDto } getMusicsDto @returns */
     getMusics = async (getMusicsDto) => {
         try {
             console.log(Music);
-            console.log('테스트', getMusicsDto);
 
-            const musics = await Music.findAll();
+            const { page, pageCount } = getMusicsDto;
+            const musics = await Music.findAll({
+                offset: pageCount * (page - 1),
+                limit: pageCount,
+            });
             console.log(Object.keys(musics));
 
             const musicList = [];
