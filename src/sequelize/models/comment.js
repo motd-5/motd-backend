@@ -14,16 +14,23 @@ module.exports = (sequelize, DataTypes) => {
     Comment.init(
         {
             commentId: {
-                type: DataTypes.INTEGER,
+                allowNull: false,
+                autoIncrement: true,
                 primaryKey: true,
+                type: DataTypes.INTEGER,
             },
-            userId: DataTypes.INTEGER,
-            content: DataTypes.STRING,
-            createdAt: DataTypes.DATE,
-            updatedAt: DataTypes.DATE,
+            userId: {
+                allowNull: false,
+                type: DataTypes.INTEGER,
+            },
+            content: {
+                allowNull: false,
+                type: DataTypes.STRING,
+            },
         },
         {
             sequelize,
+            timestamps: false,
             modelName: 'Comment',
         },
     );

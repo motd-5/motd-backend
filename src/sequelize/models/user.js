@@ -33,11 +33,10 @@ module.exports = (sequelize, DataTypes) => {
             },
             nickname: DataTypes.STRING,
             password: DataTypes.STRING,
-            createdAt: DataTypes.DATE,
-            updatedAt: DataTypes.DATE,
         },
         {
             sequelize,
+            timestamps: false,
             modelName: 'User',
         },
     );
