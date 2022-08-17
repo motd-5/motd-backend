@@ -42,19 +42,13 @@ class MusicRepository extends BaseRepository {
             console.log('테스트', getMusicsDto);
 
             const musics = await Music.findAll();
-            // console.log(musics);
-            // const getAllMusic = musics.dataValues;
             console.log(Object.keys(musics));
 
             const musicList = [];
             for (const music of musics) {
                 musicList.push(music.dataValues);
-                // console.log(getAllMusic);
             }
-
             return musicList;
-            // console.log(music.dataValues);
-            // const getDto = new GetMusicsDto(musics?.dataValues);
         } catch (err) {
             console.log(err);
             throw err;
@@ -65,7 +59,7 @@ class MusicRepository extends BaseRepository {
      * @param { number } musicId
      */
     getOneMusic = async (musicId) => {
-        console.log('찾았니?', musicId);
+        console.log(musicId);
 
         const findResult = await Music.findOne({
             where: { musicId },
