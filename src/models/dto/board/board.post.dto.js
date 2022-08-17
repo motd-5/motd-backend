@@ -1,25 +1,27 @@
 const joi = require('joi');
+// const { SequelizeScopeError } = require('sequelize/types');
 const BaseDto = require('../base/base.dto');
 
-class PostCommentsDto extends BaseDto {
+class BoardPostDto extends BaseDto {
     userId;
-    commentId;
+    title;
     content;
 
-    constructor({ userId, commentId, content }) {
+    constructor({ userId, title, content }) {
         super();
+
         this.userId = userId;
-        this.commentId = commentId;
+        this.title = title;
         this.content = content;
     }
 
     getJoiInstance() {
         return {
             userId: joi.number().required(),
-            commentId: joi.number().required(),
+            title: joi.string().required(),
             content: joi.string().required(),
         };
     }
 }
 
-module.exports = PostCommentsDto;
+module.exports = BoardPostDto;

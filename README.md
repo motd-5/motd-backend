@@ -1,63 +1,66 @@
-# Welcome 🎉 Base-Express
+# #Mood of the day
 
-This is `First Step` of [Basic Course](https://github.com/Boiler-Express/.github/blob/main/profile/BASIC-COURSE.md) to dev Express App.
+프로젝트 설명
 
-This Template only contain **Basic Application**.
+1. [기술 문서 리스트](./docs/README.md)
+2. [트러블 문서 리스트](./docs_error/README.md)
 
-If you want to more information of Architecture, visit [Architecture.md](https://github.com/Boiler-Express/Base-Express/blob/main/ARCHITECTURE.md)
-
-<img src="./ARCHITECTURE.png" style="width: 500px;">
-
-
-<hr>
-
-## Get Started, lastest version
+### 폴더 구조
 
 ```cmd
-git clone https://github.com/Boiler-Express/Base-Express.git
-npx degit Boiler-Express/Base-Express
+root
+├ /.github
+│ ├ /ISSUE_TEMPLATE
+│ │ └ **.md
+│ └ pull_request_template.md
+├ /.husky
+├ /docs
+├ /docs_error
+├ src
+├ test
+└ ~ other files...
 ```
 
-- `git clone` : copy all files, include all versions.
-- `npx degit` : copy all files, except versions.
+### 프로젝트 팀원
 
-<hr>
+-   @waveinyu (Leader) [GitHub](https://github.com/waveinyu)
+-   @unchaptered [GitHub](https://github.com/unchaptered) [Velog](https://velog.io/@wlwjsan)
+-   @JeungHoSub [GitHub](https://github.com/JeungHoSub) [Velog](https://velog.io/@unchapterd)
 
-## Get Start, selected version
-
-> You can select specific release version. <br>
-> But you can push local file into new Repo. <br>
-> IF you can encounter _shallow update not allowed_, visit our issue [[Issue] [remote rejected] shallow update not allowed](https://github.com/Boiler-Express/Base-Express/issues/6)
-
-```cmd
-<!-- If, you want to clone @1.0.0 / @1.1.0 version -->
-
-git clone -b '@1.0.0' --single-branch https://github.com/Boiler-Express/Base-Express.git
-
-git clone -b '@1.1.0' --single-branch https://github.com/Boiler-Express/Base-Express.git
-```
-
-| Versions  | Description   | Updated Date |
-| :-------: | :-----------  | :----------- |
-| @1.0.0    | This version contains... <br> - Base Strcutrue of Singleton Express | `2022-07-22` |
-| @1.1.0    | This version contains... <br> - Base Structure of Singleton Express <br> - Base Config Settings of Testing, `Jest` | `2022-07-22` |
-| @1.2.0    | This version contains... <br> - Base Structure of Singleton Express <br> - Base Config Settings of Testing, `Jest` <br> - 100% coverage testing code, for eaxmples | `2022-07-22` (latest) |
-
-
-<hr>
-
-## Modules
+### 모듈 리스트
 
 ```json
-  "dependencies": {
-    "dotenv": "^16.0.1",
-    "express": "^4.18.1"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.18.9",     // for testing, with es6.
-    "@types/jest": "^28.1.6",     // for testing, with es6.
-    "jest": "^28.1.3",            // for testing, with es6.
-    "cross-env": "^7.0.3",
-    "nodemon": "^2.0.19"
-  }
+"dependencies": {
+    "dotenv": "^16.0.1",            //
+    "express": "^4.18.1",           //
+
+    "joi": "^17.6.0",               //
+    "cors": "^2.8.5",               //
+
+    "bcrypt": "^5.0.1",             //
+    "jsonwebtoken": "^8.5.1",       //
+    "mysql2": "^2.3.3",             //
+    "sequelize": "^6.21.3",         //
+    "multer": "^1.4.5-lts.1",       //
+    "multer-s3": "^2.10.0",         //
+    "aws-sdk": "^2.1195.0"          //
+},
+"devDependencies": {
+    "@babel/core": "^7.18.9",       //
+    "@babel/preset-env": "^7.18.9", //
+
+    "jest": "^28.1.3",              //
+    "@types/jest": "^28.1.6",       //
+
+    "cross-env": "^7.0.3",          //
+
+    "morgan": "^1.10.0",            //
+    "nodemon": "^2.0.19",           //
+
+    "husky": "^8.0.1",              //
+    "prettier": "^2.7.1",           //
+    "lint-staged": "^13.0.3",       //
+
+    "sequelize-cli": "^6.4.1"       //
+},
 ```

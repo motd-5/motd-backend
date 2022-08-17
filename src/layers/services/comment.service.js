@@ -1,54 +1,53 @@
-const {
-    PostCommentDto,
-    GetCommentDto,
-    UpdateCommentDto,
-    DeleteCommentDto,
-    UserJoinDto,
-    ConflictException,
-} = require('../../models/_.loader');
+const { PostCommentDto, NotFoundException, DeleteCommentDto } = require('../../models/_.loader');
+
+const UserRepository = require('../repositories/user.repository');
+const MusicRepository = require('../repositories/music.repository');
 const CommentRepository = require('../repositories/comment.repository');
 
 class CommentService {
+    userRepository;
+    musicRepository;
     commentRepository;
 
     constructor() {
+        this.userRepository = new UserRepository();
+        this.musicRepository = new MusicRepository();
         this.commentRepository = new CommentRepository();
     }
 
-    /** @param { PostCommentDto } postCommentDto @return { string }*/
+    /** @param { PostCommentDto } postCommentDto */
     postComment = async (postCommentDto) => {
-        const result = await this.commentRepository.postComments(postCommentDto);
+        try {
+            const isExistsUser = this.userRepository.isExistsUserById(postCommentDto.userId);
+            if (!isExistsUser) throw new NotFoundException('존재 하지 않는 사용자 입니다.');
 
-        return result;
+            const isExistsMusic = this.musicRepository.isExistsMusicByMusicId(
+                postCommentDto.musicId,
+            );
+            if (!isExistsMusic) throw new NotFoundException('존재 하지 않는 음악 입니다.');
+
+            return await this.commentRepository.createComment(postCommentDto);
+        } catch (err) {
+            throw err;
+        }
     };
 
-    /** @param { GetCommentDto } getCommentDto @return { string }*/
-    getComments = async (getCommentsDto) => {
-        const result = await this.commentRepository.getComments(getCommentDto);
+    /** @param { DeleteCommentDto } deleteCommentDto */
+    deleteComment = async (deleteCommentDto) => {
+        try {
+            const isExistsUser = this.userRepository.isExistsUserById(deleteCommentDto.userId);
+            if (!isExistsUser) throw new NotFoundException('존재 하지 않는 사용자 입니다.');
 
-        return result;
+            const isExistsMusic = this.commentRepository.isExistsCommentByCommentId(
+                deleteCommentDto.commentId,
+            );
+            if (!isExistsMusic) throw new NotFoundException('존재 하지 않는 댓글 입니다.');
+
+            return await this.commentRepository.deleteComment(deleteCommentDto);
+        } catch (err) {
+            throw err;
+        }
     };
-
-    /** @param { UpdateCommentDto } getCommentDto @return { string }*/
-    updateComments = async (updateComments) => {
-        const result = await this.commentRepository.updateComments(updateCommentDto);
-
-        return result;
-    };
-
-    /** @param { DeleteCommentDto } getCommentDto @return { string }*/
-    deleteComments = async (deleteComments) => {
-        const result = await this.commentRepository.deleteComments(deleteCommentDto);
-
-        return result;
-    };
-
-    // /** @param { GetCommentDto } getCommentDto @return { string }*/
-    // getOneComment = async (getOneComment) => {
-    //     const result = await this.commentRepository.getOneComment();
-
-    //     return result;
-    // };
 }
 
 module.exports = CommentService;

@@ -1,14 +1,12 @@
 const { Router } = require('express');
-
-const CommentController = require('../controllers/comment.controller');
 const { tokenGuard } = require('../../middlewares/_.loader');
 
-const commentRouter = Router();
+const CommentController = require('../controllers/comment.controller');
 const commentController = new CommentController();
 
-commentRouter.get('', commentController.getComments);
-commentRouter.post('', tokenGuard, commentController.postComments);
-commentRouter.put('/:commentId', tokenGuard, commentController.updateComments);
-commentRouter.delete('/:commentId', tokenGuard, commentController.deleteComments);
+const commentRouter = Router();
+
+commentRouter.post('', tokenGuard, commentController.postComment);
+commentRouter.delete('/:commentId', tokenGuard, commentController.deleteComment);
 
 module.exports = commentRouter;

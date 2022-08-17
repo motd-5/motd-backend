@@ -1,23 +1,15 @@
 const { Router } = require('express');
-const { preventUnLoginGuard, s3Middleware } = require('../../middlewares/_.loader');
+const { preventUnLoginGuard, s3Middleware, tokenGuard } = require('../../middlewares/_.loader');
 
 const boardRouter = Router();
-const BoardController = require('../controllers/music.controller');
+const BoardController = require('../controllers/board.controller');
 
 const boardController = new BoardController();
 
-boardRouter.get('');
-boardRouter.post('');
-boardRouter.put('/posts/:postId');
-boardRouter.delete('/posts/:postId');
-
-// musicRouter.get('', musicController.getMusics);
-// musicRouter.post(
-//     '',
-//     preventUnLoginGuard,
-//     s3Middleware.single('userUploadImage'),
-//     musicController.postMusics,
-// );
-// musicRouter.get('/:musicId', musicController.getOneMusic);
+boardRouter.post('', tokenGuard, boardController.postBoard);
+boardRouter.get('', boardController.getBoard);
+boardRouter.get('/:postId', boardController.getOneBoard);
+boardRouter.put('/:postId', boardController.putBoard);
+boardRouter.delete('/:postId', boardController.deleteBoard);
 
 module.exports = boardRouter;

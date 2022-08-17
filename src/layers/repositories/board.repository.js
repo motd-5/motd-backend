@@ -1,59 +1,53 @@
-const { Music } = require('../../sequelize/models');
+const { Board } = require('../../sequelize/models');
+// const dto
+const { BoardPostDto, BoardGetDto, BoardDto } = require('../../models/_.loader');
 const {
-    // GetMusicsDto,
-    PostMusicDto,
-    OneMusicsDto,
     CustomException,
     ConflictException,
     UnkownException,
     UnhandleMysqlSequelizeError,
     NotFoundException,
-    GetMusicsDto,
 } = require('../../models/_.loader');
 const BaseRepository = require('./base.repository');
 
-class MusicRepository extends BaseRepository {
+class BoardRepository extends BaseRepository {
     constructor() {
         super();
     }
 
-    /** @param { PostMusicDto } postMusicDto @returns */
-    postMusics = async (postMusicDto) => {
+    /** @param { BoardPostDto } boardPostDto @returns */
+    postBoard = async (boardPostDto) => {
         try {
-            // (추후 추가)s3 변환 정보(musicUrl) 받아오고 Post DB에 저장
-
-            const music = await Music.create({
-                userId: postMusicDto.userId,
-                title: postMusicDto.title,
-                artist: postMusicDto.artist,
-                album: postMusicDto.album,
-                musicUrl: postMusicDto.musicUrl,
+            const post = await Board.create({
+                userId: boardPostDto.userId,
+                title: boardPostDto.title,
+                content: boardPostDto.content,
             });
 
-            return music;
+            return post;
         } catch (err) {
             console.log(err);
             throw err;
         }
     };
 
-    /** @param { GetMusicsDto } getMusicsDto @returns */
-    getMusics = async (getMusicsDto) => {
+    /** @param { BoardGetDto } getMusicsDto @returns */
+    getBoard = async (boardGetDto) => {
         try {
-            console.log(Music);
-
-            const { page, pageCount } = getMusicsDto;
-            const musics = await Music.findAll({
+            const { page, pageCount } = boardGetDto;
+            const posts = await Board.findAll({
                 offset: pageCount * (page - 1),
                 limit: pageCount,
+                attributes: ['postId', 'userId', 'title', 'content'],
             });
-            console.log(Object.keys(musics));
 
-            const musicList = [];
-            for (const music of musics) {
-                musicList.push(music.dataValues);
+            const postList = [];
+            for (const post of posts) {
+                console.log(post.dataValues);
+                // postList.push(post.dataValues); // 게시글 값
+                postList.push(new BoardGetDto(post?.dataValues)); // 페이지네이션 값
             }
-            return musicList;
+            return postList;
         } catch (err) {
             console.log(err);
             throw err;
@@ -61,21 +55,34 @@ class MusicRepository extends BaseRepository {
     };
 
     /**
-     * @param { number } musicId
+     * @param { number } postId
      */
-    getOneMusic = async (musicId) => {
-        console.log(musicId);
+    getOneBoard = async (postId) => {
+        try {
+            console.log(postId);
 
-        const findResult = await Music.findOne({
-            where: { musicId },
-            attributes: ['musicId', 'title', 'artist', 'album', 'musicUrl'],
-        });
-        console.log(findResult);
+            const findResult = await Board.findOne({
+                where: { postId },
+                attributes: ['postId', 'userId', 'title', 'content'],
+            });
+            console.log(findResult);
 
-        if (findResult === null) throw new NotFoundException('존재하지 않는 음악입니다.');
+            if (findResult === null) throw new NotFoundException('존재하지 않는 글입니다.');
 
-        return findResult;
+            return 'hello';
+        } catch (err) {
+            console.log(err);
+            throw err;
+        }
+    };
+
+    putBoard = async () => {
+        return;
+    };
+
+    deleteBoard = async () => {
+        return;
     };
 }
 
-module.exports = MusicRepository;
+module.exports = BoardRepository;
