@@ -82,11 +82,11 @@ class MusicController {
     getOneMusic = async (req, res, next) => {
         try {
             const musicId = await this.joiValidator.validateNumber(req?.params?.musicId);
-            const music = await this.musicService.getOneMusic(musicId);
+            const musicOne = await this.musicService.getOneMusic(musicId);
 
             return res.status(200).json(
                 this.formProvider.getSuccessFormDto('노래 상세 조회에 성공했습니다.', {
-                    musicDesc: music,
+                    musicDesc: musicOne,
                 }),
             );
         } catch (err) {

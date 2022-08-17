@@ -1,13 +1,14 @@
 const { Music } = require('../../sequelize/models');
 const {
+    MusicDto,
     GetMusicsDto,
     PostMusicDto,
+    OneMusicsDto,
     CustomException,
     ConflictException,
     UnkownException,
     UnhandleMysqlSequelizeError,
     NotFoundException,
-    MusicDto,
 } = require('../../models/_.loader');
 const BaseRepository = require('./base.repository');
 
@@ -39,17 +40,13 @@ class MusicRepository extends BaseRepository {
     /** @param { GetMusicsDto } getMusicsDto @returns */
     getMusics = async (getMusicsDto) => {
         try {
-            const { page, pageCount } = getMusicsDto;
-
             // https://kyounghwan01.github.io/blog/etc/sequelize/sequelize-pagenation/#%E1%84%8C%E1%85%A9%E1%86%BC%E1%84%92%E1%85%A1%E1%86%B8
+
+            const { page, pageCount } = getMusicsDto;
             const musics = await Music.findAll({
                 offset: pageCount * (page - 1),
                 limit: pageCount,
             });
-            // const musics = await Music.findAll({
-            //     offset: 0,
-            //     limit: 1
-            // });
 
             let musicList = [];
             for (const music of musics) {
