@@ -2,7 +2,6 @@ const { Router } = require('express');
 
 const UserController = require('../controllers/user.controller');
 const { tokenGuard } = require('../../middlewares/_.loader');
-
 const userRouter = Router();
 const userController = new UserController();
 

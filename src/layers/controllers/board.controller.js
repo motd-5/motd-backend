@@ -22,19 +22,29 @@ class BoardController {
     }
 
     // 게시글 생성
-    postBoard = async (req, res, next) => {};
+    postBoard = async (req, res, next) => {
+        return 'hello';
+    };
 
     // 게시글 전체 조회
-    getBoard = async (req, res, next) => {};
+    getBoard = async (req, res, next) => {
+        return 'hello';
+    };
 
     // 게시글 상세 조회
-    getOneBoard = async (req, res, next) => {};
+    getOneBoard = async (req, res, next) => {
+        return 'hello';
+    };
 
     // 게시글 수정
-    putBoard = async (req, res, next) => {};
+    putBoard = async (req, res, next) => {
+        return 'hello';
+    };
 
     // 게시글 삭제
-    deleteBoard = async (req, res, next) => {};
+    deleteBoard = async (req, res, next) => {
+        return 'hello';
+    };
 }
 
 module.exports = boardController;
