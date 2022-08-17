@@ -4,6 +4,8 @@ const { Comment } = require('../../sequelize/models');
 const {
     PostCommentDto,
     NotFoundException,
+    GetCommentDto,
+    UpdateCommentDto,
     DeleteCommentDto,
     CommentDto,
 } = require('../../models/_.loader');
@@ -48,13 +50,51 @@ class CommentRepository extends BaseRepository {
         }
     };
 
+    /** @param { GetCommentDto } getCommentDto @returns { Promise<CommentDto[]> } */
+    getComment = async (getCommentDto) => {
+        try {
+            const { page, pageCount } = getCommentDto;
+            const comments = await Comment.findAll({
+                offset: pageCount * (page - 1),
+                limit: pageCount,
+                attributes: ['commentId', 'content'],
+            });
+
+            let commentList = [];
+            for (const comment of comments) {
+                commentList.push(comment.dataValues);
+            }
+
+            return commentList;
+        } catch (err) {
+            console.log(err);
+            throw this.exeptionHandler(err);
+        }
+        // throw err;
+    };
+
+    /** @param { UpdateCommentDto } updateCommentDto */
+    updateComment = async (updateCommentDto) => {
+        try {
+            const comment = await Comment.update(
+                { content: updateCommentDto.content },
+                { where: { commentId: updateCommentDto.commentId } },
+            );
+            console.log('코멘트', comment);
+            return comment;
+        } catch (err) {
+            console.log(err);
+            throw this.exeptionHandler(err);
+        }
+    };
+
     /** @param { DeleteCommentDto } deleteCommentDto */
     deleteComment = async (deleteCommentDto) => {
         try {
             const comment = await Comment.destroy({
                 where: {
-                    userId: deleteCommentDto.commentId,
-                    commentId: deleteCommentDto.userId,
+                    userId: deleteCommentDto.userId,
+                    commentId: deleteCommentDto.commentId,
                 },
             });
             if (comment === 0) throw new NotFoundException('이미 존재하지 않는 댓글입니다.');
