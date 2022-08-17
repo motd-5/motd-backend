@@ -1,35 +1,35 @@
 const joi = require('joi');
 const BaseDto = require('../base/base.dto');
 
-class OneMusicsDto extends BaseDto {
-    musicId;
+class MusicDto extends BaseDto {
     userId;
+    musicId;
     title;
     artist;
     album;
     musicUrl;
 
-    constructor({ musicId, userId, title, artist, album, musicValue }) {
+    constructor({ userId, musicId, title, artist, album, musicUrl }) {
         super();
-        this.musicId = musicId;
+
         this.userId = userId;
+        this.musicId = musicId;
         this.title = title;
         this.artist = artist;
         this.album = album;
-        this.musicValue = musicValue;
+        this.musicUrl = musicUrl;
     }
 
-    // Dto는 핊요한 요소들을 꺼내오는 자원
     getJoiInstance() {
         return {
-            musicId: joi.number().required(),
             userId: joi.number().required(),
+            musicId: joi.number().required(),
             title: joi.string().required(),
             artist: joi.string().required(),
             album: joi.string().required(),
-            musicValue: joi.string().required(),
+            musicUrl: joi.string().required(),
         };
     }
 }
 
-module.exports = OneMusicsDto;
+module.exports = MusicDto;

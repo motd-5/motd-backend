@@ -1,7 +1,7 @@
 'use strict';
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-    class MusicComment extends Model {
+    class MusicLike extends Model {
         /**
          * Helper method for defining associations.
          * This method is not a part of Sequelize lifecycle.
@@ -11,33 +11,37 @@ module.exports = (sequelize, DataTypes) => {
             // define association here
         }
     }
-    MusicComment.init(
+    MusicLike.init(
         {
             musicId: {
+                allowNull: false,
                 primaryKey: true,
                 type: DataTypes.INTEGER,
             },
-            commentId: {
+            userId: {
+                allowNull: false,
                 type: DataTypes.INTEGER,
             },
         },
         {
             sequelize,
             timestamps: false,
-            modelName: 'MusicComment',
+            modelName: 'MusicLike',
         },
     );
-    MusicComment.associate = function (models) {
-        MusicComment.belongsTo(models.Music, {
-            foreignKey: 'musicId',
-            targetKey: 'musicId',
+    MusicLike.associate = function (models) {
+        MusicLike.belongsTo(models.Music, {
+            foreignKey: 'musicId', // MusicLike.musicId
+            targetKey: 'musicId', // User.musicId
+            onUpdate: 'cascade',
             onDelete: 'cascade',
-        }),
-            MusicComment.belongsTo(models.Comment, {
-                foreignKey: 'commentId',
-                targetKey: 'commentId',
-                onDelete: 'cascade',
-            });
+        });
+        MusicLike.belongsTo(models.User, {
+            foreignKey: 'userId', // MusicLike.userId
+            targetKey: 'userId', // User.userId
+            onUpdate: 'cascade',
+            onDelete: 'cascade',
+        });
     };
-    return MusicComment;
+    return MusicLike;
 };

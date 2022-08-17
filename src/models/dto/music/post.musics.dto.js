@@ -1,7 +1,7 @@
 const joi = require('joi');
 const BaseDto = require('../base/base.dto');
 
-class PostMusicsDto extends BaseDto {
+class MusicsDto extends BaseDto {
     userId;
     title;
     artist;
@@ -28,4 +28,4 @@ class PostMusicsDto extends BaseDto {
     }
 }
 
-module.exports = PostMusicsDto;
+module.exports = MusicsDto;
