@@ -1,12 +1,17 @@
 const joi = require('joi');
 const BaseDto = require('../base/base.dto');
 
-class DeleteCommentsDto extends BaseDto {
-    commentId;
-    content;
+class DeleteCommentDto extends BaseDto {
+    /** @type { number } */
+    userId;
 
+    /** @type { number } */
+    commentId;
+
+    /** @param { { userId: number, commentId: number } } IUserDto */
     constructor({ userId, commentId }) {
         super();
+
         this.userId = userId;
         this.commentId = commentId;
     }
@@ -19,4 +24,4 @@ class DeleteCommentsDto extends BaseDto {
     }
 }
 
-module.exports = DeleteCommentsDto;
+module.exports = DeleteCommentDto;
