@@ -121,6 +121,7 @@ class UserRepository extends BaseRepository {
 
             return userDto;
         } catch (err) {
+            // 또는 err?.origin?.errno 1062 일 떄, ...
             if (err?.original?.code === 'ER_DUP_ENTRY')
                 throw new ConflictException(`${userJoinDto.email} 은 사용 중인 이메일입니다.`);
             else throw this.exeptionHandler(err);
