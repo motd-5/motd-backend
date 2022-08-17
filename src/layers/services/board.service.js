@@ -15,8 +15,8 @@ class BoardService {
         return result;
     };
 
-    /** @param { BoardGetDto } BoardPostDto @return { string }*/
-    getBoard = async (BoardGetDto) => {
+    /** @param { BoardGetDto } BoardGetDto @return { string }*/
+    getBoard = async (boardGetDto) => {
         const result = await this.boardRepository.getBoard(boardGetDto);
 
         return result;

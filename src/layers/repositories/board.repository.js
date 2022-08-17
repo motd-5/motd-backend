@@ -34,20 +34,19 @@ class BoardRepository extends BaseRepository {
     /** @param { BoardGetDto } getMusicsDto @returns */
     getBoard = async (boardGetDto) => {
         try {
-            console.log(Board);
-
             const { page, pageCount } = boardGetDto;
-            const posts = await Post.findAll({
+            const posts = await Board.findAll({
                 offset: pageCount * (page - 1),
                 limit: pageCount,
+                attributes: ['postId', 'userId', 'title', 'content'],
             });
-            console.log(Object.keys(posts));
 
-            // const musicList = [];
-            // for (const music of musics) {
-            //     musicList.push(music.dataValues);
-            // }
-            return 'hello';
+            const postList = [];
+            for (const post of posts) {
+                postList.push(new BoardGetDto(post?.dataValues));
+            }
+
+            return postList;
         } catch (err) {
             console.log(err);
             throw err;
