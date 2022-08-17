@@ -88,6 +88,7 @@ class CommentRepository extends BaseRepository {
         }
     };
 
+    // sequelize syntax Ref - https://sebhastian.com/sequelize-update-example/
     /** @param { DeleteCommentDto } deleteCommentDto */
     deleteComment = async (deleteCommentDto) => {
         try {
