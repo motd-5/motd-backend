@@ -21,16 +21,12 @@ class MusicService {
 
     /** @param { PostMusicDto } postMusicDto @return { string }*/
     postMusics = async (postMusicDto) => {
-        const result = await this.musicRepository.postMusics(postMusicDto);
-
-        return result;
+        return await this.musicRepository.postMusics(postMusicDto);
     };
 
     /** @param { GetMusicsDto } getMusicDto @return { string }*/
     getMusics = async (getMusicDto) => {
-        const result = await this.musicRepository.getMusics(getMusicDto);
-
-        return result;
+        return await this.musicRepository.getMusics(getMusicDto);
     };
 
     /** @param { number } musicId @return { string }*/
