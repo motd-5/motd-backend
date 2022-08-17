@@ -1,66 +1,68 @@
-const { Comment } = require('../../sequelize/models');
-const {
-    GetMusicCommentsDto,
-    PostCommentDto,
-    GetCommentsDto,
-    UpdateCommentsDto,
-    DeleteCommentsDto,
-    CustomException,
-    ConflictException,
-    UnkownException,
-    UnhandleMysqlSequelizeError,
-} = require('../../models/_.loader');
 const BaseRepository = require('./base.repository');
+const { Comment } = require('../../sequelize/models');
+
+const {
+    PostCommentDto,
+    NotFoundException,
+    DeleteCommentDto,
+    CommentDto,
+} = require('../../models/_.loader');
 
 class CommentRepository extends BaseRepository {
     constructor() {
         super();
     }
 
-    postComments = async (postCommentDto) => {
+    /**
+     *
+     * @param { number } commentId
+     * @throws { UnkownException | UnhandleMysqlSequelizeError }
+     * @returns { Promise<boolean> }
+     */
+    isExistsCommentByCommentId = async (commentId) => {
         try {
-            // (추후 추가)s3 변환 정보(musicUrl) 받아오고 Post DB에 저장
-            console.log('테스트', postCommentDto);
+            const findResult = await Comment.findOne({
+                where: { commentId },
+                attributes: ['commentId'],
+            });
+
+            if (findResult === null) return false;
+            else return true;
+        } catch (err) {
+            throw this.exeptionHandler(err);
+        }
+    };
+
+    /** @param { PostCommentDto } postCommentDto */
+    createComment = async (postCommentDto) => {
+        try {
             const comment = await Comment.create({
                 userId: postCommentDto.userId,
-                commentId: postCommentDto.commentId,
+                musicId: postCommentDto.musicId,
                 content: postCommentDto.content,
             });
 
-            const postDto = new PostCommentDto(comment?.dataValues);
-
-            return postDto;
+            return new CommentDto(comment.dataValues);
         } catch (err) {
-            console.log(err);
-            throw err;
+            throw this.exeptionHandler(err);
         }
     };
 
-    getComments = async (getCommentsDto) => {
+    /** @param { DeleteCommentDto } deleteCommentDto */
+    deleteComment = async (deleteCommentDto) => {
         try {
-            console.log(Comment);
-            console.log('테스트', getCommentsDto);
-
-            const comments = await Comment.findAll();
-
-            for (const comment of comments) {
-                // const getAllMusic = music.dataValues;
-                console.log(comment.dataValues);
-            }
-            // console.log(Object.keys(musics));
-            // const getDto = new GetMusicsDto(musics?.dataValues);
-            return;
+            const comment = await Comment.destroy({
+                where: {
+                    userId: deleteCommentDto.commentId,
+                    commentId: deleteCommentDto.userId,
+                },
+            });
+            if (comment === 0) throw new NotFoundException('이미 존재하지 않는 댓글입니다.');
+            else return true;
         } catch (err) {
-            console.log(err);
-            throw err;
+            throw this.exeptionHandler(err);
         }
-        return musics;
     };
-
-    // getOneComment = () => {
-    //     console.log('왜 안 되니?');
-    //     return 'smile';
-    // };
 }
 
 module.exports = CommentRepository;
