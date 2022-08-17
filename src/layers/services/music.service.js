@@ -1,4 +1,4 @@
-const { PostMusicDto, GetMusicDto, ConflictException } = require('../../models/_.loader');
+const { PostMusicDto, GetMusicsDto, ConflictException } = require('../../models/_.loader');
 const MusicRepository = require('../repositories/music.repository');
 
 class MusicService {
@@ -17,18 +17,16 @@ class MusicService {
         return result;
     };
 
-    /** @param { GetMusicDto } getMusicDto @return { string }*/
-    getMusics = async (getMusics) => {
-        const result = await this.musicRepository.getMusics();
+    /** @param { GetMusicsDto } getMusicDto @return { string }*/
+    getMusics = async (getMusicDto) => {
+        const result = await this.musicRepository.getMusics(getMusicDto);
 
         return result;
     };
 
     /** @param { number } musicId @return { string }*/
     getOneMusic = async (musicId) => {
-        const result = await this.musicRepository.getOneMusic(musicId);
-
-        return musicId;
+        return await this.musicRepository.getOneMusic(musicId);
     };
 }
 

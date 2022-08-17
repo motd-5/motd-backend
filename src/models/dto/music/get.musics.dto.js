@@ -2,10 +2,13 @@ const joi = require('joi');
 const BaseDto = require('../base/base.dto');
 
 class GetMusicsDto extends BaseDto {
+    /** @type  { number } */
     page;
+
+    /** @type  { number } */
     pageCount;
 
-    constructor({}) {
+    constructor({ page }) {
         super();
         this.page = page;
         this.pageCount = 6;
