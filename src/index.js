@@ -29,7 +29,7 @@ app.all('*', corsMiddleware);
 app.use('/api', globalRouter);
 app.use('/api/musics', musicRouter);
 app.use('/api/users', userRouter);
-app.use('api/posts', boardRouter);
 app.use('/api/comments', commentRouter);
+app.use('/api/posts', boardRouter);
 
 app.listen(3000, () => console.log(`Server is running on 3000`));
