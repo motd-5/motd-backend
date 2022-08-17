@@ -78,6 +78,42 @@ class UserService {
             throw err;
         }
     };
+
+    /** @param { number } userId */
+    getMyUploadedMusics = async (userId) => {
+        try {
+            const isExists = await this.userRepository.isExistsUserById(userId);
+            if (!isExists) throw new NotFoundException('존재 하지 않는 사용자입니다.');
+
+            return { userId };
+        } catch (err) {
+            throw err;
+        }
+    };
+
+    /** @param { number } userId */
+    getMyLikedMusics = async (userId) => {
+        try {
+            const isExists = await this.userRepository.isExistsUserById(userId);
+            if (!isExists) throw new NotFoundException('존재 하지 않는 사용자입니다.');
+
+            return { userId };
+        } catch (err) {
+            throw err;
+        }
+    };
+
+    /** @param { number } userId */
+    getMyLikedPosts = async (userId) => {
+        try {
+            const isExists = await this.userRepository.isExistsUserById(userId);
+            if (!isExists) throw new NotFoundException('존재 하지 않는 사용자입니다.');
+
+            return { userId };
+        } catch (err) {
+            throw err;
+        }
+    };
 }
 
 module.exports = UserService;
