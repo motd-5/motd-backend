@@ -2,12 +2,12 @@ const { Router } = require('express');
 const { preventUnLoginGuard, s3Middleware } = require('../../middlewares/_.loader');
 
 const boardRouter = Router();
-// const boardController = require('../controllers/music.controller');
+const BoardController = require('../controllers/music.controller');
 
-// const musicController = new MusicController();
+const boardController = new BoardController();
 
-boardRouter.get('/');
-boardRouter.post('/');
+boardRouter.get('');
+boardRouter.post('');
 boardRouter.put('/posts/:postId');
 boardRouter.delete('/posts/:postId');
 

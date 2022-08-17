@@ -1,13 +1,11 @@
 const { PostMusicDto, GetMusicDto, ConflictException } = require('../../models/_.loader');
-const MusicRepository = require('../repositories/music.repository');
+const BoardRepository = require('../repositories/board.repository');
 
-class MusicService {
-    musicRepository;
-    // postMusicDto;
+class BoardService {
+    boardRepository;
 
     constructor() {
-        this.musicRepository = new MusicRepository();
-        // this.postMusicDto = new PostMusicDto();
+        this.boardRepository = new BoardRepository();
     }
 
     /** @param { PostMusicDto } postMusicDto @return { string }*/
@@ -32,4 +30,4 @@ class MusicService {
     };
 }
 
-module.exports = MusicService;
+module.exports = BoardService;
