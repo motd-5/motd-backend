@@ -1,7 +1,7 @@
 'use strict';
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-    class Board extends Model {
+    class MusicLike extends Model {
         /**
          * Helper method for defining associations.
          * This method is not a part of Sequelize lifecycle.
@@ -11,44 +11,37 @@ module.exports = (sequelize, DataTypes) => {
             // define association here
         }
     }
-    Board.init(
+    MusicLike.init(
         {
-            boardId: {
+            musicId: {
                 allowNull: false,
-                autoIncrement: true,
                 primaryKey: true,
                 type: DataTypes.INTEGER,
             },
-
             userId: {
                 allowNull: false,
-                primaryKey: true,
                 type: DataTypes.INTEGER,
-            },
-
-            title: {
-                allowNull: false,
-                type: DataTypes.STRING,
-            },
-            content: {
-                allowNull: false,
-                type: DataTypes.STRING,
             },
         },
         {
             sequelize,
             timestamps: false,
-            modelName: 'Board',
+            modelName: 'MusicLike',
         },
     );
-    Board.associate = function (models) {
-        Board.belongsTo(models.User, {
-            foreignKey: 'userId',
-            targetKey: 'userId',
+    MusicLike.associate = function (models) {
+        MusicLike.belongsTo(models.Music, {
+            foreignKey: 'musicId', // MusicLike.musicId
+            targetKey: 'musicId', // User.musicId
+            onUpdate: 'cascade',
+            onDelete: 'cascade',
+        });
+        MusicLike.belongsTo(models.User, {
+            foreignKey: 'userId', // MusicLike.userId
+            targetKey: 'userId', // User.userId
             onUpdate: 'cascade',
             onDelete: 'cascade',
         });
     };
-
-    return Board;
+    return MusicLike;
 };
