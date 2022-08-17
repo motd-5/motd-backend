@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     }
     Board.init(
         {
-            boardId: {
+            postId: {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
