@@ -8,6 +8,7 @@ const {
     BadRequestException,
     UnkownException,
     MusicDto,
+    LikeMusicDto,
 } = require('../../models/_.loader');
 const { FormDtoProvider, JoiValidator, exceptionHandler } = require('../../modules/_.loader');
 // const etMusicsDto = require('../../models/dto/music/get.musics.dto');
@@ -26,6 +27,7 @@ class MusicController {
     }
 
     // 음악 생성
+    /** @param { e.Request } req   @param { e.Response } res  @param { e.NextFunction } next */
     postMusics = async (req, res, next) => {
         const userId = 1;
         const { title, artist, album } = req.query;
@@ -55,6 +57,7 @@ class MusicController {
     };
 
     // 음악 전체 조회
+    /** @param { e.Request } req   @param { e.Response } res  @param { e.NextFunction } next */
     getMusics = async (req, res, next) => {
         try {
             const page = req?.query?.page ?? 1;
@@ -79,6 +82,7 @@ class MusicController {
     };
 
     // 음악 상세 조회
+    /** @param { e.Request } req   @param { e.Response } res  @param { e.NextFunction } next */
     getOneMusic = async (req, res, next) => {
         try {
             const musicId = await this.joiValidator.validateNumber(req?.params?.musicId);
@@ -89,6 +93,37 @@ class MusicController {
                     musicDesc: musicOne,
                 }),
             );
+        } catch (err) {
+            const exception = exceptionHandler(err);
+
+            return res
+                .status(exception.statusCode)
+                .json(this.formProvider.getFailureFormDto(exception.message));
+        }
+    };
+
+    // 음악 좋아요 반영 및 취소
+    /** @param { e.Request } req   @param { e.Response } res  @param { e.NextFunction } next */
+    toggleLike = async (req, res, next) => {
+        try {
+            const { userId } = req.body;
+            const { musicId } = req.params;
+
+            const likeMusicDto = new LikeMusicDto({ userId, musicId });
+            await this.joiValidator.validate(likeMusicDto);
+
+            const result = await this.musicService.toggleLike(likeMusicDto);
+
+            return res
+                .status(200)
+                .json(
+                    this.formProvider.getSuccessFormDto(
+                        `해당 노래의 좋아요가 ${
+                            result.isLikeUp ? '적용(+1)' : '취소(-1)'
+                        } 되었습니다.`,
+                        { result },
+                    ),
+                );
         } catch (err) {
             const exception = exceptionHandler(err);
 
