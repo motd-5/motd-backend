@@ -1,6 +1,6 @@
 const e = require('express');
 const UserService = require('../services/user.service');
-const { UserJoinDto, UserLoginDto } = require('../../models/_.loader');
+const { UserJoinDto, UserLoginDto, PaginationDto } = require('../../models/_.loader');
 const { FormDtoProvider, JoiValidator, exceptionHandler } = require('../../modules/_.loader');
 
 class UserController {
@@ -73,12 +73,17 @@ class UserController {
     /** @param { e.Request } req   @param { e.Response } res  @param { e.NextFunction } next */
     getMyUploadedMusics = async (req, res, next) => {
         try {
-            const userId = await this.joiValidator.validateNumber(req?.body?.userId);
+            const page = req?.query?.page ?? 1;
+            const userId = req?.body?.userId;
+            const pageDto = new PaginationDto({ userId, page });
 
-            const result = await this.userService.getMyUploadedMusics(userId);
-            return res.json(this.formProvider.getSuccessFormDto('get My Upload Music', { result }));
+            await this.joiValidator.validate(pageDto);
+
+            const musicList = await this.userService.getMyUploadedMusics(pageDto);
+            return res.json(
+                this.formProvider.getSuccessFormDto('get My Upload Music', { musicList }),
+            );
         } catch (err) {
-            console.log(err);
             const exception = exceptionHandler(err);
 
             return res
@@ -90,10 +95,16 @@ class UserController {
     /** @param { e.Request } req   @param { e.Response } res  @param { e.NextFunction } next */
     getMyLikedMusics = async (req, res, next) => {
         try {
-            const userId = await this.joiValidator.validateNumber(req?.body?.userId);
+            const page = req?.query?.page ?? 1;
+            const userId = req?.body?.userId;
+            const pageDto = new PaginationDto({ userId, page });
 
-            const result = await this.userService.getMyLikedMusics(userId);
-            return res.json(this.formProvider.getSuccessFormDto('get My Like Music', { result }));
+            await this.joiValidator.validate(pageDto);
+
+            const musicList = await this.userService.getMyLikedMusics(pageDto);
+            return res.json(
+                this.formProvider.getSuccessFormDto('get My Like Music', { musicList }),
+            );
         } catch (err) {
             const exception = exceptionHandler(err);
 
@@ -106,9 +117,13 @@ class UserController {
     /** @param { e.Request } req   @param { e.Response } res  @param { e.NextFunction } next */
     getMyLikedPosts = async (req, res, next) => {
         try {
-            const userId = await this.joiValidator.validateNumber(req?.body?.userId);
+            const page = req?.query?.page ?? 1;
+            const userId = req?.body?.userId;
+            const pageDto = new PaginationDto({ userId, page });
 
-            const result = await this.userService.getMyLikedPosts(userId);
+            await this.joiValidator.validate(pageDto);
+
+            const result = await this.userService.getMyLikedPosts(pageDto);
             return res.json(this.formProvider.getSuccessFormDto('get My Like Posts', { result }));
         } catch (err) {
             const exception = exceptionHandler(err);
