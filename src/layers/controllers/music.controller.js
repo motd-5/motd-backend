@@ -40,6 +40,8 @@ class MusicController {
             const postMusicDto = new PostMusicDto({ userId, title, artist, album, musicUrl });
             await this.joiValidator.validate(postMusicDto);
 
+            console.log(req.file);
+
             const music = await this.musicService.postMusics(postMusicDto);
 
             return res.status(200).json(
