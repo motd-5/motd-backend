@@ -73,7 +73,7 @@ class MusicController {
     // 음악 상세 조회
     getOneMusic = async (req, res, next) => {
         try {
-            const musicId = this.joiValidator.validateNumber(req?.params?.musicId);
+            const musicId = await this.joiValidator.validateNumber(req?.params?.musicId);
             const musicOne = await this.musicService.getOneMusic(musicId);
 
             return res.status(200).json(
