@@ -10,8 +10,7 @@
 
 ### AWS 관련 문서
 
--   [EC2 인스턴스에 Express 설정](./aws/EC2%20%EC%9D%B8%EC%8A%A4%ED%84%B4%EC%8A%A4%EC%97%90%20Express%20%EC%84%A4%EC%A0%95.md)
--   [EC2 인스턴스에 Nginx 설정](./aws/EC2%20%EC%9D%B8%EC%8A%A4%ED%84%B4%EC%8A%A4%EC%97%90%20Nginx%20%EC%84%A4%EC%A0%95.md)
+-   [Nginx + Express 사용 설정](./aws/EC2%20%EC%9D%B8%EC%8A%A4%ED%84%B4%EC%8A%A4%EC%97%90%20Express%20%EC%84%A4%EC%A0%95.md)
 -   [IAM + S3 버킷 기본 설정](./aws/IAM%20%2B%20S3%20%EB%B2%84%ED%82%B7%20%EA%B8%B0%EB%B3%B8%20%EC%84%A4%EC%A0%95.md)
 -   [SDK 를 사용하여 이미지 업로드](./aws/SDK%20%EB%A5%BC%20%EC%82%AC%EC%9A%A9%ED%95%98%EC%97%AC%20%EC%9D%B4%EB%AF%B8%EC%A7%80%20%EC%97%85%EB%A1%9C%EB%93%9C.md)
 
@@ -28,4 +27,5 @@
 
 ### Sequelize 관련 문서
 
+-   [Sequelize 사용 사례](./sequelize/Sequelize%20%EC%82%AC%EC%9A%A9%20%EC%82%AC%EB%A1%80.md)
 -   [Sequelize 에 대하여](./sequelize/Sequelize%20%EC%97%90%20%EB%8C%80%ED%95%98%EC%97%AC.md)
