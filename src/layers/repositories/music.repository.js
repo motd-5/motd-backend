@@ -1,11 +1,14 @@
 const { Music } = require('../../sequelize/models');
 const {
-    GetMusicsDto,
+    // GetMusicsDto,
     PostMusicDto,
+    OneMusicsDto,
     CustomException,
     ConflictException,
     UnkownException,
     UnhandleMysqlSequelizeError,
+    NotFoundException,
+    GetMusicsDto,
 } = require('../../models/_.loader');
 const BaseRepository = require('./base.repository');
 
@@ -34,27 +37,27 @@ class MusicRepository extends BaseRepository {
         }
     };
 
+    /** @param { GetMusicsDto } getMusicsDto @returns */
     getMusics = async (getMusicsDto) => {
         try {
             console.log(Music);
-            console.log('테스트', getMusicsDto);
 
-            const musics = await Music.findAll();
+            const { page, pageCount } = getMusicsDto;
+            const musics = await Music.findAll({
+                offset: pageCount * (page - 1),
+                limit: pageCount,
+            });
+            console.log(Object.keys(musics));
 
-            // const getAllMusic = musics.dataValues;
-
+            const musicList = [];
             for (const music of musics) {
-                // const getAllMusic = music.dataValues;
-                console.log(music.dataValues);
+                musicList.push(music.dataValues);
             }
-            // console.log(Object.keys(musics));
-            // const getDto = new GetMusicsDto(musics?.dataValues);
-            return;
+            return musicList;
         } catch (err) {
             console.log(err);
             throw err;
         }
-        return musics;
     };
 
     /**
@@ -69,7 +72,9 @@ class MusicRepository extends BaseRepository {
         });
         console.log(findResult);
 
-        return 'smile';
+        if (findResult === null) throw new NotFoundException('존재하지 않는 음악입니다.');
+
+        return findResult;
     };
 }
 

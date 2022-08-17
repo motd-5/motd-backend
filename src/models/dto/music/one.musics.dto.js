@@ -22,6 +22,8 @@ class OneMusicsDto extends BaseDto {
     // Dto는 핊요한 요소들을 꺼내오는 자원
     getJoiInstance() {
         return {
+            musicId: joi.number().required(),
+            userId: joi.number().required(),
             title: joi.string().required(),
             artist: joi.string().required(),
             album: joi.string().required(),
@@ -30,4 +32,4 @@ class OneMusicsDto extends BaseDto {
     }
 }
 
-module.exports = GetMusicsDto;
+module.exports = OneMusicsDto;
