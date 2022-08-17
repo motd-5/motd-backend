@@ -1,7 +1,8 @@
 const joi = require('joi');
+// const { SequelizeScopeError } = require('sequelize/types');
 const BaseDto = require('../base/base.dto');
 
-class GetMusicsDto extends BaseDto {
+class BoardGetDto extends BaseDto {
     /** @type  { number } */
     page;
 
@@ -10,6 +11,7 @@ class GetMusicsDto extends BaseDto {
 
     /** @param { { page: number, pageCount: number | undefined } } IUserDto */
     constructor({ page = 1, pageCount = 3 }) {
+        // 프론트랑 상의
         super();
 
         this.page = page;
@@ -24,4 +26,4 @@ class GetMusicsDto extends BaseDto {
     }
 }
 
-module.exports = GetMusicsDto;
+module.exports = BoardGetDto;

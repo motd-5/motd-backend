@@ -1,6 +1,7 @@
-const { Music } = require('../../sequelize/models');
+const { Music, MusicLike } = require('../../sequelize/models');
 const {
-    // GetMusicsDto,
+    MusicDto,
+    GetMusicsDto,
     PostMusicDto,
     OneMusicsDto,
     CustomException,
@@ -8,7 +9,7 @@ const {
     UnkownException,
     UnhandleMysqlSequelizeError,
     NotFoundException,
-    GetMusicsDto,
+    PaginationDto,
 } = require('../../models/_.loader');
 const BaseRepository = require('./base.repository');
 
@@ -16,6 +17,127 @@ class MusicRepository extends BaseRepository {
     constructor() {
         super();
     }
+
+    /**
+     *
+     * @param { number } musicId
+     * @throws { UnkownException | UnhandleMysqlSequelizeError }
+     * @returns { Promise<boolean> }
+     */
+    isExistsMusicByMusicId = async (musicId) => {
+        try {
+            const findResult = await Music.findOne({
+                where: { musicId },
+                attributes: ['musicId'],
+            });
+
+            if (findResult === null) return false;
+            else return true;
+        } catch (err) {
+            throw this.exeptionHandler(err);
+        }
+    };
+
+    /** @param { GetMusicsDto } getMusicsDto @returns */
+    getMusics = async (getMusicsDto) => {
+        try {
+            // https://kyounghwan01.github.io/blog/etc/sequelize/sequelize-pagenation/#%E1%84%8C%E1%85%A9%E1%86%BC%E1%84%92%E1%85%A1%E1%86%B8
+
+            const { page, pageCount } = getMusicsDto;
+            const musics = await Music.findAll({
+                offset: pageCount * (page - 1),
+                limit: pageCount,
+                attributes: ['musicId', 'title', 'artist', 'album'],
+            });
+
+            let musicList = [];
+            for (const music of musics) {
+                musicList.push(new MusicDto(music?.dataValues));
+            }
+
+            return musicList;
+        } catch (err) {
+            console.log(err);
+            throw err;
+        }
+    };
+
+    /** @param { PaginationDto } pageDto */
+    getMyUploadedMusicsByUserId = async (pageDto) => {
+        try {
+            const { userId, page, pageCount } = pageDto;
+            const musics = await Music.findAll({
+                where: {
+                    userId,
+                },
+                offset: pageCount * (page - 1),
+                limit: pageCount,
+            });
+
+            let musicList = [];
+            for (const music of musics) {
+                musicList.push(new MusicDto(music?.dataValues));
+            }
+
+            return musicList;
+        } catch (err) {
+            console.log(err);
+            throw err;
+        }
+    };
+
+    /** @param { PaginationDto } pageDto */
+    getMyLikedMusicsByUserId = async (pageDto) => {
+        try {
+            const { userId, page, pageCount } = pageDto;
+            const likeList = await MusicLike.findAll({
+                include: [
+                    {
+                        model: Music,
+                        attributes: ['musicId', 'title', 'artist', 'album'],
+                    },
+                ],
+                where: {
+                    userId: userId,
+                },
+                offset: pageCount * (page - 1),
+                limit: pageCount,
+            });
+
+            let musicList = [];
+            for (const like of likeList) {
+                /**
+                 * like.dataValues.Music.dataValues;
+                 *
+                 * MusicLike.findAll() 을 하면 MusicLike 가 배열로 나옵니다.
+                 * 반복문 안에서 호출하면 하나의 MusicLike 가 나오고 원하는 값은 MusicLike.dataValue 안에 있습니다.
+                 * dataValues 안에는 musicId, userId, Music 이 있습니다.
+                 * Music 안에 있는 원하는 값은 Music.dataValues 안에 있습니다.
+                 */
+                const music = like.dataValues;
+                musicList.push(music?.dataValues);
+            }
+
+            return musicList;
+        } catch (err) {
+            console.log(err);
+            throw this.exeptionHandler(err);
+        }
+    };
+
+    /**
+     * @param { number } musicId
+     */
+    getOneMusic = async (musicId) => {
+        const findResult = await Music.findOne({
+            where: { musicId },
+            attributes: ['musicId', 'title', 'artist', 'album', 'musicUrl'],
+        });
+
+        if (findResult === null) throw new NotFoundException('존재하지 않는 음악 입니다.');
+
+        return findResult?.dataValues;
+    };
 
     /** @param { PostMusicDto } postMusicDto @returns */
     postMusics = async (postMusicDto) => {
@@ -35,46 +157,6 @@ class MusicRepository extends BaseRepository {
             console.log(err);
             throw err;
         }
-    };
-
-    /** @param { GetMusicsDto } getMusicsDto @returns */
-    getMusics = async (getMusicsDto) => {
-        try {
-            console.log(Music);
-
-            const { page, pageCount } = getMusicsDto;
-            const musics = await Music.findAll({
-                offset: pageCount * (page - 1),
-                limit: pageCount,
-            });
-            console.log(Object.keys(musics));
-
-            const musicList = [];
-            for (const music of musics) {
-                musicList.push(music.dataValues);
-            }
-            return musicList;
-        } catch (err) {
-            console.log(err);
-            throw err;
-        }
-    };
-
-    /**
-     * @param { number } musicId
-     */
-    getOneMusic = async (musicId) => {
-        console.log(musicId);
-
-        const findResult = await Music.findOne({
-            where: { musicId },
-            attributes: ['musicId', 'title', 'artist', 'album', 'musicUrl'],
-        });
-        console.log(findResult);
-
-        if (findResult === null) throw new NotFoundException('존재하지 않는 음악입니다.');
-
-        return findResult;
     };
 }
 

@@ -1,7 +1,7 @@
 'use strict';
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-    class Music extends Model {
+    class Board extends Model {
         /**
          * Helper method for defining associations.
          * This method is not a part of Sequelize lifecycle.
@@ -11,31 +11,26 @@ module.exports = (sequelize, DataTypes) => {
             // define association here
         }
     }
-    Music.init(
+    Board.init(
         {
-            musicId: {
+            postId: {
                 allowNull: false,
                 autoIncrement: true,
-                type: DataTypes.INTEGER,
                 primaryKey: true,
+                type: DataTypes.INTEGER,
             },
+
             userId: {
                 allowNull: false,
+                primaryKey: true,
                 type: DataTypes.INTEGER,
             },
+
             title: {
                 allowNull: false,
                 type: DataTypes.STRING,
             },
-            artist: {
-                allowNull: false,
-                type: DataTypes.STRING,
-            },
-            album: {
-                allowNull: false,
-                type: DataTypes.STRING,
-            },
-            musicUrl: {
+            content: {
                 allowNull: false,
                 type: DataTypes.STRING,
             },
@@ -43,17 +38,17 @@ module.exports = (sequelize, DataTypes) => {
         {
             sequelize,
             timestamps: false,
-            modelName: 'Music',
+            modelName: 'Board',
         },
     );
-    Music.associate = function (models) {
-        // https://wooooooak.github.io/node.js/2018/11/22/sequelize-1-%EB%8C%80-%EB%8B%A4/
-        Music.belongsTo(models.User, {
-            foreignKey: 'userId', // comment.userId
-            targetKey: 'userId', // user.userId
+    Board.associate = function (models) {
+        Board.belongsTo(models.User, {
+            foreignKey: 'userId',
+            targetKey: 'userId',
             onUpdate: 'cascade',
             onDelete: 'cascade',
         });
     };
-    return Music;
+
+    return Board;
 };

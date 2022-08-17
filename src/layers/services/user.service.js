@@ -1,5 +1,7 @@
-const { Sequelize } = require('sequelize');
-const { User } = require('../../sequelize/models');
+const UserRepository = require('../repositories/user.repository');
+const MusicRepository = require('../repositories/music.repository');
+const { JwtProvider, BcryptProvider } = require('../../modules/_.loader');
+
 const {
     UserDto,
     UserJoinDto,
@@ -7,17 +9,18 @@ const {
     ConflictException,
     NotFoundException,
     ForbiddenException,
+    PaginationDto,
 } = require('../../models/_.loader');
-const { JwtProvider, BcryptProvider } = require('../../modules/_.loader');
-const UserRepository = require('../repositories/user.repository');
 
 class UserService {
     userRepository;
+    musicRepository;
     bcryptProvider;
     jwtProvider;
 
     constructor() {
         this.userRepository = new UserRepository();
+        this.musicRepository = new MusicRepository();
         this.bcryptProvider = new BcryptProvider();
         this.jwtProvider = new JwtProvider();
     }
@@ -74,6 +77,42 @@ class UserService {
                     accessToken,
                 };
             }
+        } catch (err) {
+            throw err;
+        }
+    };
+
+    /** @param { PaginationDto } pageDto */
+    getMyUploadedMusics = async (pageDto) => {
+        try {
+            const isExists = await this.userRepository.isExistsUserById(pageDto.userId);
+            if (!isExists) throw new NotFoundException('존재 하지 않는 사용자입니다.');
+
+            return await this.musicRepository.getMyUploadedMusicsByUserId(pageDto);
+        } catch (err) {
+            throw err;
+        }
+    };
+
+    /** @param { PaginationDto } pageDto */
+    getMyLikedMusics = async (pageDto) => {
+        try {
+            const isExists = await this.userRepository.isExistsUserById(pageDto.userId);
+            if (!isExists) throw new NotFoundException('존재 하지 않는 사용자입니다.');
+
+            return await this.musicRepository.getMyLikedMusicsByUserId(pageDto);
+        } catch (err) {
+            throw err;
+        }
+    };
+
+    /** @param { PaginationDto } pageDto */
+    getMyLikedPosts = async (pageDto) => {
+        try {
+            const isExists = await this.userRepository.isExistsUserById(pageDto.userId);
+            if (!isExists) throw new NotFoundException('존재 하지 않는 사용자입니다.');
+
+            return { pageDto };
         } catch (err) {
             throw err;
         }
