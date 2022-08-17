@@ -19,6 +19,10 @@ const PostCommentsDto = require('./dto/comment/post.comments.dto');
 const DeleteCommentsDto = require('./dto/comment/delete.comments.dto');
 const UpdateCommentsDto = require('./dto/comment/update.comments.dto');
 
+const BoardDto = require('./dto/board/board.dto');
+const BoardPostDto = require('./dto/board/board.post.dto');
+const BoardGetDto = require('./dto/board/board.get.dto');
+
 const PaginationDto = require('./dto/pagination.dto');
 
 const {
@@ -55,6 +59,10 @@ module.exports = {
     PostMusicDto,
     OneMusicsDto,
     LikeMusicDto,
+
+    BoardDto,
+    BoardPostDto,
+    BoardGetDto,
 
     CustomException,
     BadRequestException,

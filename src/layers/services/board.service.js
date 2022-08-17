@@ -1,4 +1,4 @@
-const { PostMusicDto, GetMusicDto, ConflictException } = require('../../models/_.loader');
+const { BoardPostDto, BoardGetDto, BoardDto, ConflictException } = require('../../models/_.loader');
 const BoardRepository = require('../repositories/board.repository');
 
 class BoardService {
@@ -8,23 +8,37 @@ class BoardService {
         this.boardRepository = new BoardRepository();
     }
 
-    /** @param { PostMusicDto } postMusicDto @return { string }*/
-    postMusics = async (postMusicDto) => {
-        const result = await this.musicRepository.postMusics(postMusicDto);
+    /** @param { BoardPostDto } BoardPostDto @return { string }*/
+    postBoard = async (boardPostDto) => {
+        const result = await this.boardRepository.postBoard(boardPostDto);
 
         return result;
     };
 
-    /** @param { GetMusicDto } getMusicDto @return { string }*/
-    getMusics = async (getMusicDto) => {
-        const result = await this.musicRepository.getMusics(getMusicDto);
+    /** @param { BoardGetDto } BoardPostDto @return { string }*/
+    getBoard = async (BoardGetDto) => {
+        const result = await this.boardRepository.getBoard(boardGetDto);
 
         return result;
     };
 
-    /** @param { number } musicId @return { string }*/
-    getOneMusic = async (musicId) => {
-        const result = await this.musicRepository.getOneMusic(musicId);
+    /** @param { number } postId @return { string }*/
+    getOneBoard = async (postId) => {
+        const result = await this.boardRepository.getOneBoard();
+
+        return result;
+    };
+
+    /** @param { number } postId @return { string }*/
+    putBoard = async (postId) => {
+        const result = await this.boardRepository.putBoard();
+
+        return result;
+    };
+
+    /** @param { number } postId @return { string }*/
+    deleteBoard = async (postId) => {
+        const result = await this.boardRepository.deleteBoard();
 
         return result;
     };
