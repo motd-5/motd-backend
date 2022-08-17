@@ -16,6 +16,7 @@ const OneMusicsDto = require('./dto/music/one.musics.dto');
 
 const CommentDto = require('./dto/comment/comment.dto');
 const PostCommentDto = require('./dto/comment/post.comment.dto');
+const DeleteCommentDto = require('./dto/comment/delete.comment.dto');
 
 const PaginationDto = require('./dto/pagination.dto');
 
@@ -51,6 +52,7 @@ module.exports = {
 
     CommentDto,
     PostCommentDto,
+    DeleteCommentDto,
 
     CustomException,
     BadRequestException,
