@@ -2,10 +2,12 @@ const { Music } = require('../../sequelize/models');
 const {
     // GetMusicsDto,
     PostMusicDto,
+    OneMusicsDto,
     CustomException,
     ConflictException,
     UnkownException,
     UnhandleMysqlSequelizeError,
+    NotFoundException,
 } = require('../../models/_.loader');
 const BaseRepository = require('./base.repository');
 
@@ -63,13 +65,15 @@ class MusicRepository extends BaseRepository {
      * @param { number } musicId
      */
     getOneMusic = async (musicId) => {
-        console.log(musicId);
+        console.log('찾았니?', musicId);
 
         const findResult = await Music.findOne({
             where: { musicId },
             attributes: ['musicId', 'title', 'artist', 'album', 'musicUrl'],
         });
         console.log(findResult);
+
+        if (findResult === null) throw new NotFoundException('존재하지 않는 음악입니다.');
 
         return findResult;
     };

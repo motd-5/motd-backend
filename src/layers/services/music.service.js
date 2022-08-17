@@ -28,7 +28,7 @@ class MusicService {
     getOneMusic = async (musicId) => {
         const result = await this.musicRepository.getOneMusic(musicId);
 
-        return musicId;
+        return result;
     };
 }
 
