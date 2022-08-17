@@ -24,7 +24,7 @@ class BoardService {
 
     /** @param { number } postId @return { string }*/
     getOneBoard = async (postId) => {
-        const result = await this.boardRepository.getOneBoard();
+        const result = await this.boardRepository.getOneBoard(postId);
 
         return result;
     };

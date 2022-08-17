@@ -44,8 +44,8 @@ class BoardRepository extends BaseRepository {
             const postList = [];
             for (const post of posts) {
                 console.log(post.dataValues);
-                postList.push(post.dataValues); // 게시글 값
-                // postList.push(new BoardGetDto(post?.dataValues)); // 페이지네이션 값
+                // postList.push(post.dataValues); // 게시글 값
+                postList.push(new BoardGetDto(post?.dataValues)); // 페이지네이션 값
             }
             return postList;
         } catch (err) {
@@ -58,17 +58,22 @@ class BoardRepository extends BaseRepository {
      * @param { number } postId
      */
     getOneBoard = async (postId) => {
-        console.log(postId);
+        try {
+            console.log(postId);
 
-        const findResult = await Board.findOne({
-            where: { postId },
-            attributes: ['postId', 'userId', 'title', 'content'],
-        });
-        console.log(findResult);
+            const findResult = await Board.findOne({
+                where: { postId },
+                attributes: ['postId', 'userId', 'title', 'content'],
+            });
+            console.log(findResult);
 
-        if (findResult === null) throw new NotFoundException('존재하지 않는 글입니다.');
+            if (findResult === null) throw new NotFoundException('존재하지 않는 글입니다.');
 
-        return;
+            return 'hello';
+        } catch (err) {
+            console.log(err);
+            throw err;
+        }
     };
 
     putBoard = async () => {

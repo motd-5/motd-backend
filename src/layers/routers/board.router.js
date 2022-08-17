@@ -8,6 +8,7 @@ const boardController = new BoardController();
 
 boardRouter.post('', tokenGuard, boardController.postBoard);
 boardRouter.get('', boardController.getBoard);
+boardRouter.get('/:postId', boardController.getOneBoard);
 boardRouter.put('/:postId', boardController.putBoard);
 boardRouter.delete('/:postId', boardController.deleteBoard);
 
