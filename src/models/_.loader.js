@@ -8,8 +8,10 @@ const UserDto = require('./dto/user/user.dto');
 const UserJoinDto = require('./dto/user/user.join.dto');
 const UserLoginDto = require('./dto/user/user.login.dto');
 
+const MusicDto = require('./dto/music/musics.dto');
 const GetMusicsDto = require('./dto/music/get.musics.dto');
 const PostMusicDto = require('./dto/music/post.musics.dto');
+const OneMusicsDto = require('./dto/music/one.musics.dto');
 
 const GetCommentsDto = require('./dto/comment/get.comments.dto');
 const PostCommentsDto = require('./dto/comment/post.comments.dto');
@@ -43,8 +45,10 @@ module.exports = {
     UpdateCommentsDto,
     DeleteCommentsDto,
 
+    MusicDto,
     GetMusicsDto,
     PostMusicDto,
+    OneMusicsDto,
 
     CustomException,
     BadRequestException,

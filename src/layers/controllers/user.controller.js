@@ -31,11 +31,14 @@ class UserController {
         } catch (err) {
             const exception = exceptionHandler(err);
 
-            return res
-                .status(exception.statusCode)
-                .json(
-                    this.formProvider.getFailureFormDto(exception.message, { user: userJoinDto }),
-                );
+            return res.status(exception.statusCode).json(
+                this.formProvider.getFailureFormDto(exception.message, {
+                    user: {
+                        email: userJoinDto.email,
+                        nickanme: userJoinDto.password,
+                    },
+                }),
+            );
         }
     };
 
@@ -57,11 +60,62 @@ class UserController {
         } catch (err) {
             const exception = exceptionHandler(err);
 
+            return res.status(exception.statusCode).json(
+                this.formProvider.getFailureFormDto(exception.message, {
+                    user: {
+                        email: userLoginDto.email,
+                    },
+                }),
+            );
+        }
+    };
+
+    /** @param { e.Request } req   @param { e.Response } res  @param { e.NextFunction } next */
+    getMyUploadedMusics = async (req, res, next) => {
+        try {
+            const userId = await this.joiValidator.validateNumber(req?.body?.userId);
+
+            const result = await this.userService.getMyUploadedMusics(userId);
+            return res.json(this.formProvider.getSuccessFormDto('get My Upload Music', { result }));
+        } catch (err) {
+            console.log(err);
+            const exception = exceptionHandler(err);
+
             return res
                 .status(exception.statusCode)
-                .json(
-                    this.formProvider.getFailureFormDto(exception.message, { user: userLoginDto }),
-                );
+                .json(this.formProvider.getFailureFormDto(exception.message));
+        }
+    };
+
+    /** @param { e.Request } req   @param { e.Response } res  @param { e.NextFunction } next */
+    getMyLikedMusics = async (req, res, next) => {
+        try {
+            const userId = await this.joiValidator.validateNumber(req?.body?.userId);
+
+            const result = await this.userService.getMyLikedMusics(userId);
+            return res.json(this.formProvider.getSuccessFormDto('get My Like Music', { result }));
+        } catch (err) {
+            const exception = exceptionHandler(err);
+
+            return res
+                .status(exception.statusCode)
+                .json(this.formProvider.getFailureFormDto(exception.message));
+        }
+    };
+
+    /** @param { e.Request } req   @param { e.Response } res  @param { e.NextFunction } next */
+    getMyLikedPosts = async (req, res, next) => {
+        try {
+            const userId = await this.joiValidator.validateNumber(req?.body?.userId);
+
+            const result = await this.userService.getMyLikedPosts(userId);
+            return res.json(this.formProvider.getSuccessFormDto('get My Like Posts', { result }));
+        } catch (err) {
+            const exception = exceptionHandler(err);
+
+            return res
+                .status(exception.statusCode)
+                .json(this.formProvider.getFailureFormDto(exception.message));
         }
     };
 }

@@ -1,11 +1,14 @@
 const { Music } = require('../../sequelize/models');
 const {
+    MusicDto,
     GetMusicsDto,
     PostMusicDto,
+    OneMusicsDto,
     CustomException,
     ConflictException,
     UnkownException,
     UnhandleMysqlSequelizeError,
+    NotFoundException,
 } = require('../../models/_.loader');
 const BaseRepository = require('./base.repository');
 
@@ -34,42 +37,41 @@ class MusicRepository extends BaseRepository {
         }
     };
 
+    /** @param { GetMusicsDto } getMusicsDto @returns */
     getMusics = async (getMusicsDto) => {
         try {
-            console.log(Music);
-            console.log('테스트', getMusicsDto);
+            // https://kyounghwan01.github.io/blog/etc/sequelize/sequelize-pagenation/#%E1%84%8C%E1%85%A9%E1%86%BC%E1%84%92%E1%85%A1%E1%86%B8
 
-            const musics = await Music.findAll();
+            const { page, pageCount } = getMusicsDto;
+            const musics = await Music.findAll({
+                offset: pageCount * (page - 1),
+                limit: pageCount,
+            });
 
-            // const getAllMusic = musics.dataValues;
-
+            let musicList = [];
             for (const music of musics) {
-                // const getAllMusic = music.dataValues;
-                console.log(music.dataValues);
+                musicList.push(new MusicDto(music?.dataValues));
             }
-            // console.log(Object.keys(musics));
-            // const getDto = new GetMusicsDto(musics?.dataValues);
-            return;
+
+            return musicList;
         } catch (err) {
             console.log(err);
             throw err;
         }
-        return musics;
     };
 
     /**
      * @param { number } musicId
      */
     getOneMusic = async (musicId) => {
-        console.log(musicId);
-
         const findResult = await Music.findOne({
             where: { musicId },
             attributes: ['musicId', 'title', 'artist', 'album', 'musicUrl'],
         });
-        console.log(findResult);
 
-        return 'smile';
+        if (findResult === null) throw new NotFoundException('존재하지 않는 음악 입니다.');
+
+        return findResult?.dataValues;
     };
 }
 

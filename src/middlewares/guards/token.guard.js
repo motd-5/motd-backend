@@ -25,7 +25,7 @@ const tokenGuard = (req, res, next) => {
 
         const payload = jwtProvider.verifyToken(jwtProvider.extract(bearer));
 
-        req.body.username = payload.userId;
+        req.body.userId = payload.userId;
         req.body.nickname = payload.nickname;
 
         return next();

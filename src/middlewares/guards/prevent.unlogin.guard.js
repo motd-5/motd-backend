@@ -26,7 +26,8 @@ const preventUnLoginGuard = (req, res, next) => {
 
         try {
             const payload = jwtProvider.verifyToken(jwtProvider.extract(bearer));
-            req.body.username = payload.userId;
+
+            req.body.userId = payload.userId;
             req.body.nickname = payload.nickname;
 
             const isExists = new UserPository().isExistsUserById(payload.userId);
@@ -34,6 +35,7 @@ const preventUnLoginGuard = (req, res, next) => {
 
             return next();
         } catch (err) {
+            console.log(err);
             return res.json('알 수 없는 에러');
         }
     }
