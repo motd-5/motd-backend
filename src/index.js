@@ -20,16 +20,10 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.all('*', corsMiddleware);
-// app.all('*', function (req, res, next) {
-//   res.header('Access-Control-Allow-Origin', '*');
-//   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-//   return next();
-// });
 
 app.use('/api', globalRouter);
 app.use('/api/musics', musicRouter);
 app.use('/api/users', userRouter);
 app.use('/api/comments', commentRouter);
-app.use('/api/posts', boardRouter);
 
 app.listen(3000, () => console.log(`Server is running on 3000`));
