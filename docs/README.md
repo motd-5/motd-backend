@@ -21,10 +21,10 @@
 
 ### Code 관련 문서
 
--   [CustomException 와 핸들러에 대하여](./pattern/CustomException%20%EC%99%80%20%ED%95%B8%EB%93%A4%EB%9F%AC%EC%97%90%20%EB%8C%80%ED%95%98%EC%97%AC.md)
--   [Dto 와 JoiValidator 를 사용한 코드 개선](./pattern/Dto%20%EC%99%80%20JoiValidator%20%EB%A5%BC%20%EC%82%AC%EC%9A%A9%ED%95%9C%20%EC%BD%94%EB%93%9C%20%EA%B0%9C%EC%84%A0.md)
--   [Jwt Middleware 에 대해서](./pattern/Jwt%20Middleware%20%EC%97%90%20%EB%8C%80%ED%95%B4%EC%84%9C.md)
--   [Layered Architecture 에서 사용 해볼 법한](./pattern/Layered%20Architecture%20%EC%97%90%EC%84%9C%20%EC%82%AC%EC%9A%A9%20%ED%95%B4%EB%B3%BC%20%EB%B2%95%ED%95%9C.md)
+-   [❌] [CustomException 와 핸들러에 대하여](./pattern/CustomException%20%EC%99%80%20%ED%95%B8%EB%93%A4%EB%9F%AC%EC%97%90%20%EB%8C%80%ED%95%98%EC%97%AC.md)
+-   [❌] [Dto 와 JoiValidator 를 사용한 코드 개선](./pattern/Dto%20%EC%99%80%20JoiValidator%20%EB%A5%BC%20%EC%82%AC%EC%9A%A9%ED%95%9C%20%EC%BD%94%EB%93%9C%20%EA%B0%9C%EC%84%A0.md)
+-   [❌] [Jwt Middleware 에 대해서](./pattern/Jwt%20Middleware%20%EC%97%90%20%EB%8C%80%ED%95%B4%EC%84%9C.md)
+-   [❌] [Layered Architecture 에서 사용 해볼 법한](./pattern/Layered%20Architecture%20%EC%97%90%EC%84%9C%20%EC%82%AC%EC%9A%A9%20%ED%95%B4%EB%B3%BC%20%EB%B2%95%ED%95%9C.md)
 
 ### Sequelize 관련 문서
 
