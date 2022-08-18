@@ -3,18 +3,19 @@
 프로젝트 설명
 
 1. [기술 문서 리스트](./docs/README.md)
-2. [트러블 문서 리스트](./docs_error/README.md)
+2. [API 문서 리스트](./docs_api/API%20%EB%AA%85%EC%84%B8%EC%84%9C.md)
+3. [트러블 문서 리스트](./docs_error/README.md)
 
 ### 폴더 구조
 
 ```cmd
 root
-├ /.github                      
+├ /.github
 │  ├  /ISSUE_TEMPLATE/**.md     # Git 이슈 탬플릿
 │  └ pull_request_template.md   # Git 풀 리퀘스트
 ├ /.husky                       # Git Hooks (Local)
 ├ /docs                         # 기술 문서 : 각종 기능 적용에 대한 솔루션
-├ /docs_error                   # 에러 문서 : 각종 기능 적용에 
+├ /docs_error                   # 에러 문서 : 각종 기능 적용에
 ├ /src
 │  ├  /layers                   # 비즈니스 레이어
 │  ├  /models                   # Dto, CustomExcpetion, ...
