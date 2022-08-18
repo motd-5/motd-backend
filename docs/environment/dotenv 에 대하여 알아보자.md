@@ -8,13 +8,13 @@
 
 이번에 `node_modules/dotenv/lib/main.js` 를 열어 보니 총 3 개의 변수/함수 가 내보내지고 있는 것을 확인했습니다.
 
-<p align="center;"><img src="./env.config.lib.png" style="width: 330px"/></p>
+<p align="center;"><img src="./img/env.config.lib.png" style="width: 330px"/></p>
 
 <hr><br>
 
 `dotenv/config` 는 dotenv 파일의 config 함수를 즉시 실행하는 구문으로, 해당 함수를 보면 신기한 것을 알 수 있습니다.
 
-<p align="center;"><img src="./env.config.lib.2.png" style="width: 400px"/></p>
+<p align="center;"><img src="./img/env.config.lib.2.png" style="width: 400px"/></p>
 
 config 함수는 `매개변수`로 options 를 받아서 사용할 수 있는 친구였던 것입니다.
 
@@ -32,7 +32,7 @@ console.log(result);
 
 추가로 아래를 보면, `매개변수`, options 의 유무에 따른 분기 처리가 있습니다.
 
-<p align="center;"><img src="./env.config.lib.3.png" style="width: 340px"/></p>
+<p align="center;"><img src="./img/env.config.lib.3.png" style="width: 340px"/></p>
 
 저는 options.encoding 을 따로 사용해보지 않았어서, `options.path` 가 존재할 경우에는 dotenvPath 가 변경되는 부분이 흥미로웠습니다.
 
@@ -57,7 +57,7 @@ function _resolveHome(envPath) {
 
 분기 처리 뒷 부분을 보면, 파일을 읽기 위해서 사용 되는 fs 모듈이 사용되어 있습니다.
 
-<p align="center;"><img src="./env.config.lib.4.png" style="width: 600px"/></p>
+<p align="center;"><img src="./img/env.config.lib.4.png" style="width: 600px"/></p>
 
 저희가 `options.path` 를 주면 그 값이 그대로 dotenvPath 에 사용되며, `options.encoding` 을 주지 않으면 'utf8' 에 해당하기 때문에, _.hello_ 와 _test.js_ 파일을 만들고 다음 코드를 실행 시켜 보겠습니다.
 
