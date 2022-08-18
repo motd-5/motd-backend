@@ -14,10 +14,12 @@ module.exports = (sequelize, DataTypes) => {
     MusicComment.init(
         {
             musicId: {
+                allowNull: false,
                 primaryKey: true,
                 type: DataTypes.INTEGER,
             },
             commentId: {
+                allowNull: false,
                 type: DataTypes.INTEGER,
             },
         },
@@ -31,11 +33,13 @@ module.exports = (sequelize, DataTypes) => {
         MusicComment.belongsTo(models.Music, {
             foreignKey: 'musicId',
             targetKey: 'musicId',
+            onUpdate: 'cascade',
             onDelete: 'cascade',
         }),
             MusicComment.belongsTo(models.Comment, {
                 foreignKey: 'commentId',
                 targetKey: 'commentId',
+                onUpdate: 'cascade',
                 onDelete: 'cascade',
             });
     };

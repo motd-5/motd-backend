@@ -1,5 +1,5 @@
 const BaseRepository = require('./base.repository');
-const { Comment } = require('../../sequelize/models');
+const { Comment, MusicComment } = require('../../sequelize/models');
 
 const {
     PostCommentDto,
@@ -36,14 +36,21 @@ class CommentRepository extends BaseRepository {
     /** @param { PostCommentDto } postCommentDto */
     createComment = async (postCommentDto) => {
         try {
-            const comment = await Comment.create({
+            const commentResult = await Comment.create({
                 userId: postCommentDto.userId,
                 musicId: postCommentDto.musicId,
                 content: postCommentDto.content,
             });
-
+            const comment = commentResult.dataValues;
+            console.log(comment);
+            const musicComment = await MusicComment.create({
+                musicId: postCommentDto.musicId,
+                commentId: comment.commentId,
+            });
+            console.log(musicComment);
             return new CommentDto(comment.dataValues);
         } catch (err) {
+            console.error(err);
             throw this.exeptionHandler(err);
         }
     };
