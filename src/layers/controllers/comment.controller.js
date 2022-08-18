@@ -45,7 +45,7 @@ class CommentController {
     getComment = async (req, res, next) => {
         try {
             const page = req?.query?.page ?? 1;
-            const musicId = req?.body?.musicId;
+            const musicId = req?.query?.musicId;
 
             const getCommentDto = new GetCommentDto({ page, musicId });
             await this.joiValidator.validate(getCommentDto);
