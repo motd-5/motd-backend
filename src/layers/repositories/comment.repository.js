@@ -44,13 +44,12 @@ class CommentRepository extends BaseRepository {
                 content: postCommentDto.content,
             });
             const comment = commentResult.dataValues;
-            console.log(comment);
-            const musicComment = await MusicComment.create({
+            const musicCommentResult = await MusicComment.create({
                 musicId: postCommentDto.musicId,
                 commentId: comment.commentId,
             });
-            console.log(musicComment);
-            return new CommentDto(comment.dataValues);
+            console.log(musicCommentResult);
+            return { ...comment, nickname: postCommentDto.nickname };
         } catch (err) {
             console.error(err);
             throw this.exeptionHandler(err);

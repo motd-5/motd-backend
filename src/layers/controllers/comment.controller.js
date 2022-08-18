@@ -21,9 +21,9 @@ class CommentController {
     /** @param { e.Request } req @param { e.Response } res @param { e.NextFunction } next */
     postComment = async (req, res, next) => {
         try {
-            const { userId, musicId, content } = req?.body;
+            const { userId, nickname, musicId, content } = req?.body;
 
-            const postCommentDto = new PostCommentDto({ userId, musicId, content });
+            const postCommentDto = new PostCommentDto({ userId, nickname, musicId, content });
             await this.joiValidator.validate(postCommentDto);
 
             const comment = await this.commentService.postComment(postCommentDto);

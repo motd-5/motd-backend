@@ -9,19 +9,24 @@ class PostCommentDto extends BaseDto {
     musicId;
 
     /** @type { string } */
+    nickname;
+
+    /** @type { string } */
     content;
 
-    /** @param { { userId: number, musicId: number, content: string } } IUserDto */
-    constructor({ userId, musicId, content }) {
+    /** @param { { userId: number, musicId: number, nickname: string, content: string } } IUserDto */
+    constructor({ userId, musicId, nickname, content }) {
         super();
 
         this.userId = userId;
         this.musicId = musicId;
+        this.nickname = nickname;
         this.content = content;
     }
 
     getJoiInstance() {
         return {
+            nickname: joi.string().required(),
             userId: joi.number().required(),
             musicId: joi.number().required(),
             content: joi.string().required(),

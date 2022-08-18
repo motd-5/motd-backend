@@ -15,11 +15,11 @@ module.exports = (sequelize, DataTypes) => {
         {
             musicId: {
                 allowNull: false,
-                primaryKey: true,
                 type: DataTypes.INTEGER,
             },
             commentId: {
                 allowNull: false,
+                primaryKey: true,
                 type: DataTypes.INTEGER,
             },
         },
