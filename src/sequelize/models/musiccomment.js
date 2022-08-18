@@ -17,6 +17,10 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: false,
                 type: DataTypes.INTEGER,
             },
+            userId: {
+                allowNull: false,
+                type: DataTypes.INTEGER,
+            },
             commentId: {
                 allowNull: false,
                 primaryKey: true,
@@ -42,6 +46,12 @@ module.exports = (sequelize, DataTypes) => {
                 onUpdate: 'cascade',
                 onDelete: 'cascade',
             });
+        MusicComment.belongsTo(models.User, {
+            foreignKey: 'userId',
+            targetKey: 'userId',
+            onUpdate: 'cascade',
+            onDelete: 'cascade',
+        });
     };
     return MusicComment;
 };

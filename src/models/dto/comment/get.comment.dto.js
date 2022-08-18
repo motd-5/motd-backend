@@ -8,15 +8,20 @@ class GetCommentDto extends BaseDto {
     /** @type  { number } */
     pageCount;
 
-    /** @param { { page: number, pageCount: number | undefined } } IUserDto */
-    constructor({ page = 1, pageCount = 10 }) {
+    /** @type  { number } */
+    musicId;
+
+    /** @param { { page: number, pageCount: number | undefined, musicId } } IUserDto */
+    constructor({ page = 1, pageCount = 10, musicId }) {
         super();
 
         this.page = page;
         this.pageCount = pageCount;
+        this.musicId = musicId;
     }
     getJoiInstance() {
         return {
+            musicId: joi.number().required(),
             page: joi.number().required(),
             pageCount: joi.number().required(),
         };

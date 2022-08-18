@@ -40,7 +40,16 @@ class CommentService {
 
     /** @param { GetCommentDto } getCommentDto @return { string }*/
     getComment = async (getCommentDto) => {
-        return await this.commentRepository.getComment(getCommentDto);
+        try {
+            const isExistsMusic = this.musicRepository.isExistsMusicByMusicId(
+                getCommentDto.musicId,
+            );
+            if (!isExistsMusic) throw new NotFoundException('존재 하지 않는 음악 입니다.');
+
+            return await this.commentRepository.getComment(getCommentDto);
+        } catch (err) {
+            throw err;
+        }
     };
 
     /** @param { UpdateCommentDto } updateCommentDto @return { string }*/

@@ -1,5 +1,5 @@
 const BaseRepository = require('./base.repository');
-const { Comment, MusicComment } = require('../../sequelize/models');
+const { User, Comment, MusicComment } = require('../../sequelize/models');
 
 const {
     PostCommentDto,
@@ -45,6 +45,7 @@ class CommentRepository extends BaseRepository {
             });
             const comment = commentResult.dataValues;
             const musicCommentResult = await MusicComment.create({
+                userId: postCommentDto.userId,
                 musicId: postCommentDto.musicId,
                 commentId: comment.commentId,
             });
@@ -59,19 +60,42 @@ class CommentRepository extends BaseRepository {
     /** @param { GetCommentDto } getCommentDto @returns { Promise<CommentDto[]> } */
     getComment = async (getCommentDto) => {
         try {
-            const { page, pageCount } = getCommentDto;
-            const comments = await Comment.findAll({
-                offset: pageCount * (page - 1),
-                limit: pageCount,
-                attributes: ['commentId', 'content'],
+            const musicCommentListResult = await MusicComment.findAll({
+                include: [
+                    {
+                        model: Comment,
+                        attributes: ['userId', 'commentId', 'content'],
+                    },
+                    {
+                        model: User,
+                    },
+                ],
+                where: {
+                    musicId: getCommentDto.musicId,
+                },
             });
 
-            let commentList = [];
-            for (const comment of comments) {
-                commentList.push(comment.dataValues);
+            let musicCommentList = [];
+            for (const musicCommentResult of musicCommentListResult) {
+                musicCommentList.push({
+                    content: musicCommentResult.Comment.dataValues.content,
+                    nickname: musicCommentResult.User.dataValues.nickname,
+                    commentId: musicCommentResult.Comment.dataValues.commentId,
+                });
             }
+            // const { page, pageCount } = getCommentDto;
+            // const comments = await Comment.findAll({
+            //     offset: pageCount * (page - 1),
+            //     limit: pageCount,
+            //     attributes: ['commentId', 'content'],
+            // });
 
-            return commentList;
+            // let commentList = [];
+            // for (const comment of comments) {
+            //     commentList.push(comment.dataValues);
+            // }
+
+            return musicCommentList;
         } catch (err) {
             console.log(err);
             throw this.exeptionHandler(err);
@@ -79,6 +103,7 @@ class CommentRepository extends BaseRepository {
         // throw err;
     };
 
+    // sequelize syntax Ref - https://sebhastian.com/sequelize-update-example/
     /** @param { UpdateCommentDto } updateCommentDto */
     updateComment = async (updateCommentDto) => {
         try {
@@ -94,7 +119,6 @@ class CommentRepository extends BaseRepository {
         }
     };
 
-    // sequelize syntax Ref - https://sebhastian.com/sequelize-update-example/
     /** @param { DeleteCommentDto } deleteCommentDto */
     deleteComment = async (deleteCommentDto) => {
         try {

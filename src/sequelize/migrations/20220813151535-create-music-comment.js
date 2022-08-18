@@ -6,6 +6,10 @@ module.exports = {
                 allowNull: false,
                 type: Sequelize.INTEGER,
             },
+            userId: {
+                allowNull: false,
+                type: DataTypes.INTEGER,
+            },
             commentId: {
                 allowNull: false,
                 primaryKey: true,
