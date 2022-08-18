@@ -29,3 +29,9 @@ S3 버킷 만드실 때, 이름은 편하신 걸로 정하시면 됩니다.
 <p align="center"> <img src="https://github.com/motd-5/motd-backend/blob/main/docs/aws/S3.setting.2.png" ></p>
 
 <p align="center"> <img src="https://github.com/motd-5/motd-backend/blob/main/docs/aws/S3.setting.3.png" ></p>
+
+저는 `퍼블릭 엑세스` 항목이 URL 로 접속 할 수 있는가? 라는 내용 같고요.
+
+`ACL` 같은 경우는 저희가 생성한 객체의 소유권을 누구한테 줄 것인가 같아요.
+
+그래서 소유권 설정을 준 사람만 삭제할 수 있습니다.
