@@ -91,6 +91,7 @@ class MusicRepository extends BaseRepository {
     getMyLikedMusicsByUserId = async (pageDto) => {
         try {
             const { userId, page, pageCount } = pageDto;
+
             const likeList = await MusicLike.findAll({
                 include: [
                     {
@@ -112,11 +113,17 @@ class MusicRepository extends BaseRepository {
                  *
                  * MusicLike.findAll() 을 하면 MusicLike 가 배열로 나옵니다.
                  * 반복문 안에서 호출하면 하나의 MusicLike 가 나오고 원하는 값은 MusicLike.dataValue 안에 있습니다.
-                 * dataValues 안에는 musicId, userId, Music 이 있습니다.
+                 * dataValues 안에는 MmusicId, userId, Music 이 있습니다.
                  * Music 안에 있는 원하는 값은 Music.dataValues 안에 있습니다.
                  */
                 const music = like.dataValues;
-                musicList.push(new MusicDto(music?.dataValues));
+
+                musicList.push(
+                    new MusicDto({
+                        userId: pageDto.userId,
+                        ...music.Music.dataValues,
+                    }),
+                );
             }
 
             return musicList;
