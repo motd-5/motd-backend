@@ -12,6 +12,7 @@ const {
     PaginationDto,
 } = require('../../models/_.loader');
 const BaseRepository = require('./base.repository');
+const MusicsDto = require('../../models/dto/music/post.musics.dto');
 
 class MusicRepository extends BaseRepository {
     constructor() {
@@ -38,7 +39,7 @@ class MusicRepository extends BaseRepository {
         }
     };
 
-    /** @param { GetMusicsDto } getMusicsDto @returns */
+    /** @param { GetMusicsDto } getMusicsDto @returns { Promise<MusicDto[]> } */
     getMusics = async (getMusicsDto) => {
         try {
             // https://kyounghwan01.github.io/blog/etc/sequelize/sequelize-pagenation/#%E1%84%8C%E1%85%A9%E1%86%BC%E1%84%92%E1%85%A1%E1%86%B8
@@ -62,7 +63,7 @@ class MusicRepository extends BaseRepository {
         }
     };
 
-    /** @param { PaginationDto } pageDto */
+    /** @param { PaginationDto } pageDto @returns { Promise<MusicDto[]> */
     getMyUploadedMusicsByUserId = async (pageDto) => {
         try {
             const { userId, page, pageCount } = pageDto;
@@ -86,7 +87,7 @@ class MusicRepository extends BaseRepository {
         }
     };
 
-    /** @param { PaginationDto } pageDto */
+    /** @param { PaginationDto } pageDto @returns { Promise<MusicDto[]> } */
     getMyLikedMusicsByUserId = async (pageDto) => {
         try {
             const { userId, page, pageCount } = pageDto;
@@ -111,7 +112,7 @@ class MusicRepository extends BaseRepository {
                  *
                  * MusicLike.findAll() 을 하면 MusicLike 가 배열로 나옵니다.
                  * 반복문 안에서 호출하면 하나의 MusicLike 가 나오고 원하는 값은 MusicLike.dataValue 안에 있습니다.
-                 * dataValues 안에는 musicId, userId, Music 이 있습니다.
+                 * dataValues 안에는 MmusicId, userId, Music 이 있습니다.
                  * Music 안에 있는 원하는 값은 Music.dataValues 안에 있습니다.
                  */
 
@@ -127,9 +128,7 @@ class MusicRepository extends BaseRepository {
         }
     };
 
-    /**
-     * @param { number } musicId
-     */
+    /** @param { number } musicId @returns { Promise<MusicDto> } */
     getOneMusic = async (musicId) => {
         const findResult = await Music.findOne({
             where: { musicId },
@@ -138,10 +137,10 @@ class MusicRepository extends BaseRepository {
 
         if (findResult === null) throw new NotFoundException('존재하지 않는 음악 입니다.');
 
-        return findResult?.dataValues;
+        return new MusicDto(findResult?.dataValues);
     };
 
-    /** @param { PostMusicDto } postMusicDto @returns */
+    /** @param { PostMusicDto } postMusicDto @returns { Promise<MusicDto>} */
     postMusics = async (postMusicDto) => {
         try {
             // (추후 추가)s3 변환 정보(musicUrl) 받아오고 Post DB에 저장
@@ -154,7 +153,7 @@ class MusicRepository extends BaseRepository {
                 musicUrl: postMusicDto.musicUrl,
             });
 
-            return music;
+            return new MusicDto(music?.dataValues);
         } catch (err) {
             console.log(err);
             throw err;
