@@ -16,6 +16,7 @@
 
 ### ENV 관련 문서
 
+-   [Dotenv 에 대해서 알아보자](./environment/dotenv%20%EC%97%90%20%EB%8C%80%ED%95%98%EC%97%AC%20%EC%95%8C%EC%95%84%EB%B3%B4%EC%9E%90.md)
 -   [환경 변수 위치 및 상세 설정](./environment/%ED%99%98%EA%B2%BD%20%EB%B3%80%EC%88%98%20%EC%9C%84%EC%B9%98%20%EB%B0%8F%20%EC%83%81%EC%84%B8%20%EC%84%A4%EC%A0%95.md)
 
 ### Code 관련 문서
