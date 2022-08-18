@@ -20,10 +20,6 @@ const GetCommentDto = require('./dto/comment/get.comment.dto');
 const UpdateCommentDto = require('./dto/comment/update.comment.dto');
 const DeleteCommentDto = require('./dto/comment/delete.comment.dto');
 
-const BoardDto = require('./dto/board/board.dto');
-const BoardPostDto = require('./dto/board/board.post.dto');
-const BoardGetDto = require('./dto/board/board.get.dto');
-
 const PaginationDto = require('./dto/pagination.dto');
 
 const {
@@ -61,10 +57,6 @@ module.exports = {
     GetCommentDto,
     UpdateCommentDto,
     DeleteCommentDto,
-
-    BoardDto,
-    BoardPostDto,
-    BoardGetDto,
 
     CustomException,
     BadRequestException,
