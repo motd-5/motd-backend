@@ -16,6 +16,8 @@ const OneMusicsDto = require('./dto/music/one.musics.dto');
 
 const CommentDto = require('./dto/comment/comment.dto');
 const PostCommentDto = require('./dto/comment/post.comment.dto');
+const GetCommentDto = require('./dto/comment/get.comment.dto');
+const UpdateCommentDto = require('./dto/comment/update.comment.dto');
 const DeleteCommentDto = require('./dto/comment/delete.comment.dto');
 
 const BoardDto = require('./dto/board/board.dto');
@@ -56,7 +58,10 @@ module.exports = {
 
     CommentDto,
     PostCommentDto,
+    GetCommentDto,
+    UpdateCommentDto,
     DeleteCommentDto,
+
     BoardDto,
     BoardPostDto,
     BoardGetDto,

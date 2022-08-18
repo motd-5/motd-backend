@@ -4,11 +4,15 @@ module.exports = {
         await queryInterface.createTable('MusicComments', {
             musicId: {
                 allowNull: false,
-                primaryKey: true,
                 type: Sequelize.INTEGER,
+            },
+            userId: {
+                allowNull: false,
+                type: DataTypes.INTEGER,
             },
             commentId: {
                 allowNull: false,
+                primaryKey: true,
                 type: Sequelize.INTEGER,
             },
         });

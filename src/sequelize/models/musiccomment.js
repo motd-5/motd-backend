@@ -14,10 +14,16 @@ module.exports = (sequelize, DataTypes) => {
     MusicComment.init(
         {
             musicId: {
-                primaryKey: true,
+                allowNull: false,
+                type: DataTypes.INTEGER,
+            },
+            userId: {
+                allowNull: false,
                 type: DataTypes.INTEGER,
             },
             commentId: {
+                allowNull: false,
+                primaryKey: true,
                 type: DataTypes.INTEGER,
             },
         },
@@ -31,13 +37,21 @@ module.exports = (sequelize, DataTypes) => {
         MusicComment.belongsTo(models.Music, {
             foreignKey: 'musicId',
             targetKey: 'musicId',
+            onUpdate: 'cascade',
             onDelete: 'cascade',
         }),
             MusicComment.belongsTo(models.Comment, {
                 foreignKey: 'commentId',
                 targetKey: 'commentId',
+                onUpdate: 'cascade',
                 onDelete: 'cascade',
             });
+        MusicComment.belongsTo(models.User, {
+            foreignKey: 'userId',
+            targetKey: 'userId',
+            onUpdate: 'cascade',
+            onDelete: 'cascade',
+        });
     };
     return MusicComment;
 };

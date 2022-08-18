@@ -41,14 +41,9 @@ class BoardController {
         } catch (err) {
             const exception = exceptionHandler(err);
 
-            return res.status(exception.statusCode).json(
-                this.formProvider.getFailureFormDto(exception.message, {
-                    post: {
-                        title: boardPostDto.title,
-                        content: boardPostDto.password,
-                    },
-                }),
-            );
+            return res
+                .status(exception.statusCode)
+                .json(this.formProvider.getFailureFormDto(exception.message));
         }
     };
 
@@ -78,7 +73,12 @@ class BoardController {
 
     // 게시글 상세 조회
     getOneBoard = async (req, res, next) => {
-        return 'hello';
+        try {
+            const postId = await this.joiValidator.validateNumber(req?.params?.postId);
+            const postOne = await this.boardService.getOneBoard(postId);
+
+            return res.send('hello');
+        } catch (err) {}
     };
 
     // 게시글 수정

@@ -1,6 +1,6 @@
 const { Board } = require('../../sequelize/models');
 // const dto
-const { BoardPostDto, BoardGetDto } = require('../../models/_.loader');
+const { BoardPostDto, BoardGetDto, BoardDto } = require('../../models/_.loader');
 const {
     CustomException,
     ConflictException,
@@ -34,20 +34,20 @@ class BoardRepository extends BaseRepository {
     /** @param { BoardGetDto } getMusicsDto @returns */
     getBoard = async (boardGetDto) => {
         try {
-            console.log(Board);
-
             const { page, pageCount } = boardGetDto;
-            const posts = await Post.findAll({
+            const posts = await Board.findAll({
                 offset: pageCount * (page - 1),
                 limit: pageCount,
+                attributes: ['postId', 'userId', 'title', 'content'],
             });
-            console.log(Object.keys(posts));
 
-            // const musicList = [];
-            // for (const music of musics) {
-            //     musicList.push(music.dataValues);
-            // }
-            return 'hello';
+            const postList = [];
+            for (const post of posts) {
+                console.log(post.dataValues);
+                // postList.push(post.dataValues); // 게시글 값
+                postList.push(new BoardGetDto(post?.dataValues)); // 페이지네이션 값
+            }
+            return postList;
         } catch (err) {
             console.log(err);
             throw err;
@@ -55,20 +55,25 @@ class BoardRepository extends BaseRepository {
     };
 
     /**
-     * @param { number } musicId
+     * @param { number } postId
      */
-    getOneBoard = async (musicId) => {
-        // console.log(musicId);
+    getOneBoard = async (postId) => {
+        try {
+            console.log(postId);
 
-        // const findResult = await Music.findOne({
-        //     where: { musicId },
-        //     attributes: ['musicId', 'title', 'artist', 'album', 'musicUrl'],
-        // });
-        // console.log(findResult);
+            const findResult = await Board.findOne({
+                where: { postId },
+                attributes: ['postId', 'userId', 'title', 'content'],
+            });
+            console.log(findResult);
 
-        // if (findResult === null) throw new NotFoundException('존재하지 않는 음악입니다.');
+            if (findResult === null) throw new NotFoundException('존재하지 않는 글입니다.');
 
-        return;
+            return 'hello';
+        } catch (err) {
+            console.log(err);
+            throw err;
+        }
     };
 
     putBoard = async () => {
