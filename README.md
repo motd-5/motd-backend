@@ -9,15 +9,19 @@
 
 ```cmd
 root
-├ /.github
-│ ├ /ISSUE_TEMPLATE
-│ │ └ **.md
-│ └ pull_request_template.md
-├ /.husky
-├ /docs
-├ /docs_error
-├ src
-├ test
+├ /.github                      
+│  ├  /ISSUE_TEMPLATE/**.md     # Git 이슈 탬플릿
+│  └ pull_request_template.md   # Git 풀 리퀘스트
+├ /.husky                       # Git Hooks (Local)
+├ /docs                         # 기술 문서 : 각종 기능 적용에 대한 솔루션
+├ /docs_error                   # 에러 문서 : 각종 기능 적용에 
+├ /src
+│  ├  /layers                   # 비즈니스 레이어
+│  ├  /models                   # Dto, CustomExcpetion, ...
+│  ├  /modules                  # Provider, Validators, ...
+│  ├  /middleware               # Cors, Guards, S3Middleware, ...
+│  └  /sequelize                # Config, Migrations, Models, Seeders, ...
+├ /test
 └ ~ other files...
 ```
 
