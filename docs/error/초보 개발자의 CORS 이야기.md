@@ -15,17 +15,22 @@
 
 #### Browser pre-flight 란?
 
-pre-flight란 CORS 상황에서 보안을 확인하기 위해 `브라우저`가 제공하는 기능입니다. pre-flight는 미리 통신을 함으로써 문제가 있는 요청에 대해 일부러 ERROR를 발생시킵니다.
+pre-flight란 CORS 상황에서 보안을 확인하기 위해 `브라우저`가 제공하는 기능입니다. 웹 요청이 CORS 이슈의 어떤 조건을 만족할 경우, 해당 리소스에 접근하기 위해서 사전 작업이 필요할 때 pre-flight는 미리 통신을 함으로써 문제가 있는 요청에 대해 일부러 ERROR를 발생시킵니다.
 
-pre-flight가 발생하는 상황
+#### pre-flight가 발생하는 상황
 
-1. OPTIONS
+-   OPTIONS
 
-브라우저에서 OPTIONS를 던져 해당 사이트를 사용 가능한 METHOD 정보를 가져오게 될 때 pre-flight가 일어납니다. 개발자는 실제 원하는 요청에 대해 작성해주면 되고 따로 OPTION request를 보내는 코드를 작성하지 않아도 됩니다.
+    브라우저에서 OPTIONS를 던져 해당 사이트를 사용 가능한 METHOD 정보를 가져오게 될 때 pre-flight가 일어납니다. 개발자는 실제 원하는 요청에 대해 작성해주면 되고 따로 OPTION request를 보내는 코드를 작성하지 않아도 됩니다.
 
-2. Simple Request ()
+-   Simple Request
 
-[pre-flight 관련 정보](https://about-tech.tistory.com/entry/Programming-CORS%EB%9E%80-preflight-OPTIONS-%EB%A9%94%EC%86%8C%EB%93%9C)
+    Simple Request란 CORS의 preflight를 발생시키지 않는 요청을 말합니다.
+
+    -   조건 1. GET, HEAD, POST 중 하나의 HTTP 메서드에 속할 때
+    -   조건 2. 요청 헤더에 user agent에 의해 자동적으로 정해지는 헤더(Connection, User-Agent, Fetch 스펙에 정의된 "Forbidden header name")를 제외, 그리고 Fetch 스펙에 정의된 "CORS-safelisted request-header" 포함하는 경우
+
+> [pre-flight 관련 정보](https://about-tech.tistory.com/entry/Programming-CORS%EB%9E%80-preflight-OPTIONS-%EB%A9%94%EC%86%8C%EB%93%9C)
 
 -   작성자 : @waveinyu
 
