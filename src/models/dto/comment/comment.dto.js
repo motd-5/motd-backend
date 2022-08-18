@@ -8,13 +8,17 @@ class CommentDto extends BaseDto {
     /** @type  { number } */
     musicId;
 
+    /** @type { string } */
+    nickname;
+
     /** @type  { string } */
     content;
 
-    /** @param { { userId: number, musicId: number, content: string } } IUserDto */
-    constructor({ userId, musicId, content }) {
+    /** @param { { userId: number, musicId: number, nickname:string, content: string } } IUserDto */
+    constructor({ userId, musicId, nickname, content }) {
         super();
 
+        this.nickname = nickname;
         this.userId = userId;
         this.musicId = musicId;
         this.content = content;

@@ -1,4 +1,10 @@
-const { PostCommentDto, NotFoundException, DeleteCommentDto } = require('../../models/_.loader');
+const {
+    PostCommentDto,
+    NotFoundException,
+    DeleteCommentDto,
+    GetCommentDto,
+    UpdateCommentDto,
+} = require('../../models/_.loader');
 
 const UserRepository = require('../repositories/user.repository');
 const MusicRepository = require('../repositories/music.repository');
@@ -30,6 +36,25 @@ class CommentService {
         } catch (err) {
             throw err;
         }
+    };
+
+    /** @param { GetCommentDto } getCommentDto @return { string }*/
+    getComment = async (getCommentDto) => {
+        try {
+            const isExistsMusic = this.musicRepository.isExistsMusicByMusicId(
+                getCommentDto.musicId,
+            );
+            if (!isExistsMusic) throw new NotFoundException('존재 하지 않는 음악 입니다.');
+
+            return await this.commentRepository.getComment(getCommentDto);
+        } catch (err) {
+            throw err;
+        }
+    };
+
+    /** @param { UpdateCommentDto } updateCommentDto @return { string }*/
+    updateComment = async (updateCommentDto) => {
+        return await this.commentRepository.updateComment(updateCommentDto);
     };
 
     /** @param { DeleteCommentDto } deleteCommentDto */
