@@ -62,36 +62,33 @@ root
 
 ```json
 "dependencies": {
-    "dotenv": "^16.0.1",            //
-    "express": "^4.18.1",           //
+    "dotenv": "^16.0.1",            
+    "express": "^4.18.1",           
 
-    "joi": "^17.6.0",               //
-    "cors": "^2.8.5",               //
+    "joi": "^17.6.0",               // 유효성 검사 
+    "cors": "^2.8.5",               // CORS 미들웨어
 
-    "bcrypt": "^5.0.1",             //
-    "jsonwebtoken": "^8.5.1",       //
-    "mysql2": "^2.3.3",             //
-    "sequelize": "^6.21.3",         //
-    "multer": "^1.4.5-lts.1",       //
-    "multer-s3": "^2.10.0",         //
-    "aws-sdk": "^2.1195.0"          //
+    "bcrypt": "^5.0.1",             // 단방향 암호화 모듈
+    "jsonwebtoken": "^8.5.1",       // 앙뱡향 암호화, JSON 토큰 모듈
+    "mysql2": "^2.3.3",             // sequelize 사용을 위한 종속성 모듈 
+    "sequelize": "^6.21.3",         // ORM, _객체 관계 매핑_ 모듈
+    "multer": "^1.4.5-lts.1",       // FormData 를 위한 모듈
+    "multer-s3": "^2.10.0",         // multer 와 aws-sdk 연결을 위한 종속성 모듈
+    "aws-sdk": "^2.1195.0"          // AWS 서비스를 사용하기 위한 모듈
 },
 "devDependencies": {
-    "@babel/core": "^7.18.9",       //
-    "@babel/preset-env": "^7.18.9", //
+    "jest": "^28.1.3",              // 테스트 모듈
+    "@types/jest": "^28.1.6",       // Jest 종속성 모듈
 
-    "jest": "^28.1.3",              //
-    "@types/jest": "^28.1.6",       //
+    "cross-env": "^7.0.3",          // NODE_ENV 설정을 위한 모듈
 
-    "cross-env": "^7.0.3",          //
+    "morgan": "^1.10.0",            // 편리한 로깅을 위한 모듈
+    "nodemon": "^2.0.19",           // 자동 실행을 위한 모듈
+ 
+    "husky": "^8.0.1",              // prettier 자동 적용을 위한 모듈
+    "prettier": "^2.7.1",           // 코드 포맷팅 모듈
+    "lint-staged": "^13.0.3",       // preetier 자동 적용을 위한 종속성 모듈
 
-    "morgan": "^1.10.0",            //
-    "nodemon": "^2.0.19",           //
-
-    "husky": "^8.0.1",              //
-    "prettier": "^2.7.1",           //
-    "lint-staged": "^13.0.3",       //
-
-    "sequelize-cli": "^6.4.1"       //
+    "sequelize-cli": "^6.4.1"       // sequelize 를 편리하게 
 },
 ```
